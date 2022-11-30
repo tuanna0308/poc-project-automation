@@ -18,6 +18,8 @@
         <selenium.version>3.141.59</selenium.version>
         <log4j2.version>2.17.1</log4j2.version>
         <slf4j.version>2.0.3</slf4j.version>
+        <aspectj.version>1.9.9.1</aspectj.version>
+        <allure-testng-version>2.17.3</allure-testng-version>
     </properties>
 
     <dependencies>
@@ -89,6 +91,13 @@
             <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure-testng-version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -111,7 +120,18 @@
                     <suiteXmlFiles>
                         <file>src/test/resources/runSmokeTest.xml</file>
                     </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

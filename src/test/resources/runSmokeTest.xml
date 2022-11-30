@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Run Smoke Test for PoC Project" parallel="false">
+    <parameter name="pageUrl" value="http://localhost:8080/"/>
+
+
+</suite>

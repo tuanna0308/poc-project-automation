@@ -30,4 +30,8 @@ public class BaseTest {
     public void tearDown() {
         DriverConfig.quiteDriver();
     }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
 }

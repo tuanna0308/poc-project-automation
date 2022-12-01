@@ -1,9 +1,7 @@
 package com.epam.poc.utilities.listeners;
 
 import com.epam.poc.commons.BaseTest;
-import com.epam.poc.utilities.logs.Log;
 import io.qameta.allure.Attachment;
-import java.util.Objects;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -16,29 +14,30 @@ public class TestListener extends BaseTest implements ITestListener {
         return iTestResult.getMethod().getConstructorOrMethod().getName();
     }
 
-    @Attachment(value = "Page screenshot", type = "image/png")
-    public byte[] saveScreenshotPNG(WebDriver driver) {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    }
     @Attachment(value = "{0}", type = "text/plain")
     public static String saveTextLog(String message) {
         return message;
     }
 
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshotPNG(WebDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
     @Override
     public void onStart(ITestContext iTestContext) {
-        Log.info("I am in onStart method " + iTestContext.getName());
-        iTestContext.setAttribute("WebDriver", this.driver);
+        logger.info("I am in onStart method " + iTestContext.getName());
+        iTestContext.setAttribute("WebDriver", driver);
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        Log.info("I am in onFinish method " + iTestContext.getName());
+        logger.info("I am in onFinish method " + iTestContext.getName());
     }
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        Log.info(getTestMethodName(iTestResult) + " test is starting.");
+        logger.info(getTestMethodName(iTestResult) + " test is starting.");
     }
 
     @Override
@@ -48,7 +47,7 @@ public class TestListener extends BaseTest implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        Log.info(getTestMethodName(iTestResult) + " test is failed.");
+        logger.info(getTestMethodName(iTestResult) + " test is failed.");
 
         //Get driver from BaseTest and assign to local WebDriver variable.
         Object testClass = iTestResult.getInstance();
@@ -56,7 +55,7 @@ public class TestListener extends BaseTest implements ITestListener {
 
         //Allure ScreenShotRobot and SaveTestLog
         if (driver != null) {
-            Log.info("Screenshot captured for test case: " + getTestMethodName(iTestResult));
+            logger.info("Screenshot captured for test case: " + getTestMethodName(iTestResult));
             saveScreenshotPNG(driver);
         }
 

@@ -2,7 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Run Smoke Test for PoC Project" parallel="false">
+
     <parameter name="pageUrl" value="https://shopee.vn/"/>
+    
+    <listeners>
+        <listener class-name="com.epam.poc.utilities.listeners.TestListener"/>
+    </listeners>
 
     <test name="Run on CHROME">
         <parameter name="browserName" value="chrome"/>

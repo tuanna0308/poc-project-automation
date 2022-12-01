@@ -1,34 +1,33 @@
 package com.epam.poc.commons;
 
-import com.epam.poc.utilities.logs.Log;
+import com.epam.poc.configs.drivers.DriverConfig;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 public class BaseTest {
-    public WebDriver driver;
+    protected static WebDriver driver;
 
-    public WebDriver getDriver() {
-        return driver;
+    protected Logger logger;
+
+    protected BaseTest() {
+        logger = LogManager.getLogger(getClass());
     }
 
-    @BeforeClass
-    public void classLevelSetup() {
-      Log.info("Tests are starting!");
-      System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
-      driver = new ChromeDriver();
+    @Parameters({"pageUrl", "browserName"})
+    @BeforeTest
+    public void setUp(String pageUrl, String browserName) {
+        logger.info("Page Url: " + pageUrl + " with browser name: " + browserName);
+
+        driver = DriverConfig.getDriver(browserName);
+        driver.get(pageUrl);
     }
 
-    @BeforeMethod
-    public void methodLevelSetup() {
-        Log.info("Step start");
-    }
-
-    @AfterClass
-    public void teardown() {
-        Log.info("Tests are ending!");
-        driver.quit();
+    @AfterClass(alwaysRun = true)
+    public void tearDown() {
+        DriverConfig.quiteDriver();
     }
 }

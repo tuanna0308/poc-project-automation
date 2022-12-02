@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
 @Epic("Smoke test")
-@Feature("Test template")
+@Feature("HomePage")
 public class HomePageTest extends BaseTest {
 
     private HomePageObject homePage;
@@ -26,10 +26,10 @@ public class HomePageTest extends BaseTest {
         homePage = new HomePageObject(driver);
     }
 
-    @Test
+    @Test(priority = 1, description = "Open home page successfully")
     @Severity(SeverityLevel.NORMAL)
     @Description("Test description: Test demo for opening Shopee site")
-    @Story("Story template")
+    @Story("Open HomePage")
     public void testOpenHomePageSuccessfully() {
         Assert.assertEquals(homePage.getPageTitle(driver), "Shopee Việt Nam | Mua và Bán Trên Ứng Dụng Di Động Hoặc Website");
     }
@@ -37,7 +37,7 @@ public class HomePageTest extends BaseTest {
     @Test(priority = 1, description = "Passed case template")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Test description: Demo for passed case")
-    @Story("Story template")
+    @Story("Open HomePage")
     public void passedCaseTemplate() {
         Assert.assertTrue(true);
     }
@@ -45,8 +45,9 @@ public class HomePageTest extends BaseTest {
     @Test(priority = 2, description = "Failed case template")
     @Severity(SeverityLevel.BLOCKER)
     @Description("Test description: Demo for failed case")
-    @Story("Story template")
+    @Story("Open HomePage")
     public void failedCaseTemplate() {
+        Assert.assertEquals(homePage.getPageTitle(driver), "Shopee Việt Nam | Mua và Bán Trên Ứng Dụng Di Động Hoặc Website");
         Assert.assertTrue(false);
     }
 }

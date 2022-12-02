@@ -13,6 +13,9 @@ public class ChromeBrowser {
         ChromeOptions options = new ChromeOptions();
         // Set options for Chrome browser
         options.addArguments("--lang=vi");
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
 
         return new ChromeDriver(options);
     }

@@ -21,10 +21,6 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: AllureGenerate@1
-  inputs:
-    resultsDir: 'target/allure-results'
-    targetDir: 'allure-report/$(Build.BuildNumber)'
 - task: PublishTestResults@2
   displayName: publish unit test results
   inputs:
@@ -34,3 +30,8 @@ steps:
     testRunTitle: Unit test results for $(Build.BuildNumber)
     buildConfiguration: debug
     mergeTestResults: true
+- task: AllureGenerate@1
+  inputs:
+    resultsDir: 'target/allure-results'
+    targetDir: 'allure-report/$(Build.BuildNumber)'
+

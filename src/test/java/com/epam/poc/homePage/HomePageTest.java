@@ -48,6 +48,6 @@ public class HomePageTest extends BaseTest {
     @Story("Open HomePage")
     public void failedCaseTemplate() {
         Assert.assertEquals(homePage.getPageTitle(driver), "Shopee Việt Nam | Mua và Bán Trên Ứng Dụng Di Động Hoặc Website");
-        Assert.assertTrue(false);
+//        Assert.assertTrue(false);
     }
 }

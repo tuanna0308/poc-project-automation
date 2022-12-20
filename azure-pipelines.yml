@@ -30,6 +30,7 @@ steps:
     testRunTitle: Unit test results for $(Build.BuildNumber)
     buildConfiguration: debug
     mergeTestResults: true
+
 - task: AllureGenerate@1
   inputs:
     resultsDir: 'target/allure-results'

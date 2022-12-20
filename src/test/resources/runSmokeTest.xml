@@ -5,9 +5,9 @@
 
     <parameter name="pageUrl" value="https://shopee.vn/"/>
     
-    <listeners>
-        <listener class-name="com.epam.poc.utilities.listeners.TestListener"/>
-    </listeners>
+<!--    <listeners>-->
+<!--        <listener class-name="com.epam.poc.utilities.listeners.TestListener"/>-->
+<!--    </listeners>-->
 
     <test name="Run on CHROME">
         <parameter name="browserName" value="chrome"/>

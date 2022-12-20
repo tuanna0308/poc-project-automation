@@ -1,9 +1,13 @@
 package com.epam.poc.configs.drivers;
 
+import com.epam.poc.commons.GlobalConstants;
 import com.epam.poc.configs.browsers.BrowserName;
 import com.epam.poc.configs.browsers.ChromeBrowser;
 import com.epam.poc.configs.browsers.FirefoxBrowser;
+import com.epam.poc.utilities.PropertyReader;
 import org.openqa.selenium.WebDriver;
+
+import java.util.concurrent.TimeUnit;
 
 public class DriverConfig {
 
@@ -27,6 +31,9 @@ public class DriverConfig {
             }
         }
         driver.manage().window().maximize();
+
+        PropertyReader propertyReader = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY);
+        driver.manage().timeouts().implicitlyWait(Long.parseLong(propertyReader.getValue(GlobalConstants.SHORT_TIMEOUT_KEY)), TimeUnit.SECONDS);
 
         return driver;
     }

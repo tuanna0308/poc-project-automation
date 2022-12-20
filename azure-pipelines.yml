@@ -25,3 +25,12 @@ steps:
   inputs:
     resultsDir: 'target/allure-results'
     targetDir: 'allure-report/$(Build.BuildNumber)'
+- task: PublishTestResults@2
+  displayName: publish unit test results
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'file*.extension'
+    searchFolder: 'allure-report/$(Build.BuildNumber)'
+    testRunTitle: Unit test results for $(Build.BuildNumber)
+    buildConfiguration: debug
+    mergeTestResults: true

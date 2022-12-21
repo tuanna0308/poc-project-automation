@@ -24,7 +24,7 @@ steps:
 - task: PublishTestResults@2
   displayName: publish unit test results
   inputs:
-    testResultsFormat: 'VSTest'
+    testResultsFormat: 'JUnit'
     testResultsFiles: '**/junitreports/TEST-*.xml'
     searchFolder: 'target/allure-report/$(Build.BuildNumber)'
     testRunTitle: Test results for $(Build.BuildNumber)

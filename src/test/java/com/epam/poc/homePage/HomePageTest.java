@@ -10,7 +10,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -21,8 +21,8 @@ public class HomePageTest extends BaseTest {
 
     private HomePageObject homePage;
 
-    @BeforeClass
-    public void beforeClass() {
+    @BeforeMethod
+    public void beforeMethod() {
         homePage = new HomePageObject(driver);
     }
 

@@ -4,12 +4,12 @@ import com.epam.poc.configs.drivers.DriverConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
 public class BaseTest {
-    protected static WebDriver driver;
+    protected static WebDriver driver = null;
 
     protected Logger logger;
 
@@ -26,7 +26,7 @@ public class BaseTest {
         driver.get(pageUrl);
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterTest(alwaysRun = true)
     public void tearDown() {
         DriverConfig.quiteDriver();
     }

@@ -25,8 +25,8 @@ steps:
   displayName: publish unit test results
   inputs:
     testResultsFormat: 'VSTest'
-    testResultsFiles: 'file*.extension'
+    testResultsFiles: '**/junitreports/TEST-*.xml'
     searchFolder: 'target/allure-report/$(Build.BuildNumber)'
-    testRunTitle: Unit test results for $(Build.BuildNumber)
+    testRunTitle: Test results for $(Build.BuildNumber)
     buildConfiguration: debug
     mergeTestResults: true

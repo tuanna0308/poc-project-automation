@@ -26,7 +26,3 @@ steps:
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/junitreports/TEST-*.xml'
-    searchFolder: 'target/allure-report/$(Build.BuildNumber)'
-    testRunTitle: Test results for $(Build.BuildNumber)
-    buildConfiguration: debug
-    mergeTestResults: true

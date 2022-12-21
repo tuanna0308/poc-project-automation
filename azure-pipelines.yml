@@ -23,5 +23,5 @@ steps:
 
 - task: AllureGenerate@1
   inputs:
-    resultsDir: '$(Build.SourcesDirectory)\SolutionFolder\ProjectFolder\bin\$(BuildConfiguration)\allure-results'
+    resultsDir: '**/allure-results'
     targetDir: 'allure-report/$(Build.BuildNumber)'

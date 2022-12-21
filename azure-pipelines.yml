@@ -21,8 +21,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: PublishTestResults@2
-  displayName: publish unit test results
+- task: AllureGenerate@1
   inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/junitreports/TEST-*.xml'
+    resultsDir: '$(Build.SourcesDirectory)\SolutionFolder\ProjectFolder\bin\$(BuildConfiguration)\allure-results'
+    targetDir: 'allure-report/$(Build.BuildNumber)'

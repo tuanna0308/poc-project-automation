@@ -31,6 +31,7 @@ steps:
       ls
       echo '-----ALLURE-RESULTS DIRECTORY-----'
       ls target/allure-results/
+      node -v
 
 - task: AllureGenerate@1
   inputs:

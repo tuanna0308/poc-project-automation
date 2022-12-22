@@ -68,7 +68,7 @@ public class PopularCategoriesMenuTest extends BaseTest {
     @Test(priority = 2)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Test description: Verify first 10 products have relevant content")
-    @Story("[US 25] Popular categories menu")
+    @Story("Popular categories menu")
     @Parameters({"pageUrl"})
     public void verifyFirstTenProductsWithRelevantInformation(String pageUrl) {
 

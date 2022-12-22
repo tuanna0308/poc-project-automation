@@ -37,6 +37,7 @@ public class PopularCategoriesMenuObject extends BasePage {
     public String getProductSearchResultLabel() {
         return driver.findElement(By.className(PopularCategoriesMenuUI.SHOPEE_PRODUCT_SEARCH_RESULT_LABEL_CLASS_NAME)).getText();
     }
+
     public boolean isShopSearchResultCardItemDisplayed() {
         WebElement shopSearchResultCardItem = driver.findElement(By.className(PopularCategoriesMenuUI.SHOPEE_SHOP_SEARCH_RESULT_CARD_ITEM_CLASS_NAME));
         if(shopSearchResultCardItem.isDisplayed()) {

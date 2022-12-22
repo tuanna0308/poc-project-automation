@@ -38,8 +38,9 @@ steps:
       echo '-----ALLURE-RESULTS DIRECTORY-----'
       ls target/allure-results/
       node -v
-      echo '-----ALLURE-REPORT DIRECTORY-----'
-      find $HOME -type d -name "allure-report"
+      echo '-----Fix-----'
+      sudo chown -R `whoami` ~/.npm
+      sudo chown -R `whoami` /usr/local/lib/node_modules
 
 - task: AllureGenerate@1
   inputs:

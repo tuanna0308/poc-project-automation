@@ -38,7 +38,10 @@ steps:
       echo '-----ALLURE-RESULTS DIRECTORY-----'
       ls target/allure-results/
       node -v
+      echo '-----ALLURE-REPORT DIRECTORY-----'
+      find $HOME -type d -name "allure-report"
 
 - task: AllureGenerate@1
   inputs:
     resultsDir: 'target/allure-results'
+    targetDir: 'allure-report/$(Build.BuildNumber)'

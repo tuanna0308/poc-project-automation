@@ -14,14 +14,6 @@ public class HomePageObject extends BasePage {
     }
 
     public void closeHomePagePopup() {
-        // Use for selenium 4
-        /*
-        WebElement shoppeBannerPopup = driver.findElement(By.tagName(HomePageUI.SHOPEE_BANNER_POPUP_TAG_NAME));
-        SearchContext shadowRoot = shoppeBannerPopup.getShadowRoot();
-        WebElement closeButton = shadowRoot.findElement(By.className(HomePageUI.CLOSE_BUTTON_CLASS_NAME));
-        closeButton.click();
-        */
-
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         try {
             WebElement closeButton = (WebElement) jse.executeScript("return document.querySelector('shopee-banner-popup-stateful').shadowRoot.querySelector('.shopee-popup__close-btn')");

@@ -1,7 +1,7 @@
 package com.epam.poc.pageObjects.homepage;
 
 import com.epam.poc.commons.BasePage;
-import com.epam.poc.pageUis.homepage.PopularCategoriesMenuUI;
+import com.epam.poc.pageUIs.homepage.PopularCategoriesMenuUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

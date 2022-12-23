@@ -27,10 +27,9 @@ steps:
     versionSpec: '19.x'
     checkLatest: true
 
-- task: PowerShell@2
+- task: CmdLine@2
   inputs:
-    targetType: 'inline'
-    script:
+    script: |
       echo '-----Fix-----'
       ls -ld /home/vsts/work/_tasks
       chmod -R 777 /home/vsts/work/_tasks

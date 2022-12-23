@@ -27,16 +27,16 @@ steps:
     versionSpec: '19.x'
     checkLatest: true
 
-# - task: PowerShell@2
-#   inputs:
-#     targetType: 'inline'
-#     script:
-#       echo '-----Fix-----'
-#       ls -ld /home/vsts/work/_tasks
-#       chmod -R 777 /home/vsts/work/_tasks
-#       ls -ld /home/vsts/work/_tasks
-
-- task: AllureGenerate@1
+- task: PowerShell@2
   inputs:
-    resultsDir: 'target/allure-results'
-    targetDir: 'allure-report/$(Build.BuildNumber)'
+    targetType: 'inline'
+    script:
+      echo '-----Fix-----'
+      ls -ld /home/vsts/work/_tasks
+      chmod -R 777 /home/vsts/work/_tasks
+      ls -ld /home/vsts/work/_tasks
+
+# - task: AllureGenerate@1
+#   inputs:
+#     resultsDir: 'target/allure-results'
+#     targetDir: 'allure-report/$(Build.BuildNumber)'

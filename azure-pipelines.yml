@@ -39,8 +39,9 @@ steps:
       ls target/allure-results/
       node -v
       echo '-----Fix-----'
-      sudo chown -R `whoami` ~/.npm
-      sudo chown -R `whoami` /usr/local/lib/node_modules
+      ls -ld /home/vsts/work/_tasks/
+      chmod -R 777 /home/vsts/work/_tasks
+      ls -ld /home/vsts/work/_tasks/
 
 - task: AllureGenerate@1
   inputs:

@@ -1,4 +1,4 @@
-package com.epam.poc.pageUis;
+package com.epam.poc.pageUIs;
 
 public class CommonPageUI {
 

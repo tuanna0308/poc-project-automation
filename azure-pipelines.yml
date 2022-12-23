@@ -38,6 +38,10 @@ steps:
       echo '-----ALLURE-RESULTS DIRECTORY-----'
       ls target/allure-results/
       node -v
+
+- task: CmdLine@2
+  inputs:
+    script: |
       echo '-----Fix-----'
       ls -ld /home/vsts/work/_tasks/
       chmod -R 777 /home/vsts/work/_tasks

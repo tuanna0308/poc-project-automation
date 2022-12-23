@@ -31,21 +31,10 @@ steps:
   inputs:
     targetType: 'inline'
     script:
-      echo '-----CURRENT DIRECTORY-----'
-      pwd
-      echo '-----DIRECTORIES-----'
-      ls
-      echo '-----ALLURE-RESULTS DIRECTORY-----'
-      ls target/allure-results/
-      node -v
-
-- task: CmdLine@2
-  inputs:
-    script:
       echo '-----Fix-----'
-      ls -ld /home/vsts/work/_tasks/
+      ls -ld /home/vsts/work/_tasks
       chmod -R 777 /home/vsts/work/_tasks
-      ls -ld /home/vsts/work/_tasks/
+      ls -ld /home/vsts/work/_tasks
 
 - task: AllureGenerate@1
   inputs:

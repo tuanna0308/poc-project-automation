@@ -41,7 +41,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: |
+    script:
       echo '-----Fix-----'
       ls -ld /home/vsts/work/_tasks/
       chmod -R 777 /home/vsts/work/_tasks

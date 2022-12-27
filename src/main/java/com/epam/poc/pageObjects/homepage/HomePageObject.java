@@ -1,4 +1,4 @@
-package com.epam.poc.pageObjects;
+package com.epam.poc.pageObjects.homepage;
 
 import com.epam.poc.commons.BasePage;
 import org.openqa.selenium.WebDriver;

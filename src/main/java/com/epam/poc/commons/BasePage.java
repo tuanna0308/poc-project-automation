@@ -19,6 +19,10 @@ public class BasePage {
         return driver.getTitle();
     }
 
+    public String getCurrentUrl(WebDriver driver) {
+        return driver.getCurrentUrl();
+    }
+
     public WebElement getElement(WebDriver driver, By by) {
         return driver.findElement(by);
     }

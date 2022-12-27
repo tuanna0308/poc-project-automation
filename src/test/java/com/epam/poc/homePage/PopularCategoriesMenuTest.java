@@ -30,6 +30,7 @@ public class PopularCategoriesMenuTest extends BaseTest {
     public void beforeMethod() {
         popularCategoriesMenu = new PopularCategoriesMenuObject(driver);
         homePage = new HomePageObject(driver);
+        homePage.closeHomePagePopup();
     }
 
     @Test(priority = 2)
@@ -40,7 +41,6 @@ public class PopularCategoriesMenuTest extends BaseTest {
     public void verifyRelevantInformationDisplay(String pageUrl) {
 
         // Verify the popular category
-        homePage.closeHomePagePopup();
         popularCategoriesMenu.selectCategoryByIndex(0);
         String popularCategoryText = popularCategoriesMenu.getElementTextByIndex(popularCategoriesMenu.getPopularCategories(), 0);
 
@@ -79,7 +79,6 @@ public class PopularCategoriesMenuTest extends BaseTest {
     public void verifyFirstTenProductsWithRelevantInformation(String pageUrl) {
 
         // Verify the first popular category
-        homePage.closeHomePagePopup();
         popularCategoriesMenu.selectCategoryByIndex(0);
         String popularCategoryText = popularCategoriesMenu.getElementTextByIndex(popularCategoriesMenu.getPopularCategories(), 0);
 

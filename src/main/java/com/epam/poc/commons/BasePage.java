@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class BasePage {
@@ -83,7 +84,13 @@ public class BasePage {
         }
     }
 
-
+    public void staticWait(long seconds) {
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            logger.info("Error in staticWait" + e);
+        }
+    }
     public void waitForElementUntilClickable(WebDriver driver, WebElement element){
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));

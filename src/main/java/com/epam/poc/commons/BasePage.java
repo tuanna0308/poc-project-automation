@@ -76,7 +76,7 @@ public class BasePage {
     public void waitForPageLoadedCompletely(WebDriver driver){
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
-            wait.until( webDriver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+            wait.until( wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
         }
         catch (Exception e) {
             logger.info("Page is not completed loaded.");

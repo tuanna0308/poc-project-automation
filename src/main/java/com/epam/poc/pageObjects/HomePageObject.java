@@ -19,6 +19,7 @@ public class HomePageObject extends BasePage {
             WebElement closeButton = getElementByJavascriptExecutor(driver,
                     "return document.querySelector('shopee-banner-popup-stateful').shadowRoot.querySelector('.shopee-popup__close-btn')");
             waitForPageLoadedCompletely(driver);
+            waitForElementUntilClickable(driver, closeButton);
             closeButton.click();
             waitForElementUntilInvisible(driver, closeButton);
         }

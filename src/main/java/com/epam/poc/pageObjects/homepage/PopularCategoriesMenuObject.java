@@ -16,6 +16,7 @@ public class PopularCategoriesMenuObject extends BasePage {
     }
 
     public void selectCategoryByIndex(int index) {
+        waitForElementUntilClickable(driver, getPopularCategories().get(index));
         clickToElementByIndex(getPopularCategories(), index);
     }
 

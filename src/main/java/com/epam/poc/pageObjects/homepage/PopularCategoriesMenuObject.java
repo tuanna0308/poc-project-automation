@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class PopularCategoriesMenuObject extends BasePage {
     private final WebDriver driver;
 
@@ -13,16 +15,20 @@ public class PopularCategoriesMenuObject extends BasePage {
         this.driver = driver;
     }
 
-    public String getProductCardTitleByCard(WebElement element) {
-        return element.findElement(By.xpath(PopularCategoriesMenuUI.PRODUCT_CARD_TITLE_XPATH)).getText();
+    public void selectCategoryByIndex(int index) {
+        clickToElementByIndex(getPopularCategories(), index);
     }
 
-    public boolean isContainsKeyword(String keyword, String string) {
+    public List<WebElement> getPopularCategories() {
+        return getElements(driver, By.xpath(PopularCategoriesMenuUI.POPULAR_CATEGORIES_MENU_XPATH));
+    }
+
+    public boolean isContainsKeyword(String keyword, String text) {
         boolean isContainsKeyword = false;
         String [] words = keyword.split(" ");
 
         for (String word: words ) {
-            if(string.contains(word)) {
+            if(text.toLowerCase().contains(word.toLowerCase())) {
                 isContainsKeyword = true;
             }
         }

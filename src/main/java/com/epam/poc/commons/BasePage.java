@@ -4,6 +4,7 @@ import com.epam.poc.utilities.PropertyReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 public class BasePage {
     protected Logger logger;
+   private PropertyReader propertyReader = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY);
 
     protected BasePage() {
         logger = LogManager.getLogger(getClass());
@@ -31,6 +33,13 @@ public class BasePage {
         return driver.findElement(by);
     }
 
+
+    public WebElement getElementByJavascriptExecutor(WebDriver driver, String executeScript) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        return  (WebElement) jse.executeScript(executeScript);
+    }
+
+
     public List<WebElement> getElements(WebDriver driver, By by) {
         return driver.findElements(by);
     }
@@ -43,8 +52,8 @@ public class BasePage {
         return elements.get(index).getText();
     }
 
-    public String getElementValue(WebDriver driver, By by) {
-        return driver.findElement(by).getAttribute("value").toLowerCase();
+    public String getElementByAttribute(WebDriver driver, By by, String attribute) {
+        return driver.findElement(by).getAttribute(attribute);
     }
 
     public List<WebElement> getElementWithLimitNumber(List<WebElement> elements, int numberOfElement) {
@@ -61,7 +70,6 @@ public class BasePage {
     }
 
     public void clickToElementByIndex(List<WebElement> elements, int index) {
-        elements.get(index).isEnabled();
         elements.get(index).click();
     }
 
@@ -70,8 +78,22 @@ public class BasePage {
     }
 
     public void waitForElementUntilClickable(WebDriver driver, WebElement element){
-        PropertyReader propertyReader = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY);
-        WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.SHORT_TIMEOUT_KEY)));
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+        }
+        catch (Exception e) {
+            logger.info("Element not clickable");
+        }
+    }
+
+    public void waitForElementUntilInvisible(WebDriver driver, WebElement element){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
+            wait.until(ExpectedConditions.invisibilityOf(element));
+        }
+        catch (Exception e) {
+            logger.info("Element is visibility");
+        }
     }
 }

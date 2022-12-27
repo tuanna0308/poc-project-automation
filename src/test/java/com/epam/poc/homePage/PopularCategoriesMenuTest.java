@@ -39,12 +39,10 @@ public class PopularCategoriesMenuTest extends BaseTest {
     @Parameters({"pageUrl"})
     public void verifyRelevantInformationDisplay(String pageUrl) {
 
-        // Verify the first popular category
+        // Verify the popular category
         homePage.closeHomePagePopup();
-        List<WebElement> popularCategories = popularCategoriesMenu.getElements(driver,
-                By.xpath(PopularCategoriesMenuUI.POPULAR_CATEGORIES_MENU_XPATH));
-        String popularCategoryText = popularCategoriesMenu.getElementTextByIndex(popularCategories, 1);
-        popularCategoriesMenu.clickToElementByIndex(popularCategories, 1);
+        popularCategoriesMenu.selectCategoryByIndex(0);
+        String popularCategoryText = popularCategoriesMenu.getElementTextByIndex(popularCategoriesMenu.getPopularCategories(), 0);
 
         // Verify URL
         String urlExpected = pageUrl + PageURL.SEARCH_URL + "?keyword=" + popularCategoryText.toLowerCase();
@@ -70,7 +68,7 @@ public class PopularCategoriesMenuTest extends BaseTest {
 
         // Verify search section
         Assert.assertEquals(popularCategoryText.toLowerCase(),
-                popularCategoriesMenu.getElementValue(driver, By.xpath(PopularCategoriesMenuUI.SEARCH_INPUT_XPATH)));
+                popularCategoriesMenu.getElementByAttribute(driver, By.xpath(PopularCategoriesMenuUI.SEARCH_INPUT_XPATH), "value").toLowerCase());
     }
 
     @Test(priority = 2)
@@ -82,10 +80,8 @@ public class PopularCategoriesMenuTest extends BaseTest {
 
         // Verify the first popular category
         homePage.closeHomePagePopup();
-        List<WebElement> popularCategories = popularCategoriesMenu.getElements(driver,
-                By.xpath(PopularCategoriesMenuUI.POPULAR_CATEGORIES_MENU_XPATH));
-        String popularCategoryText = popularCategoriesMenu.getElementTextByIndex(popularCategories, 1);
-        popularCategoriesMenu.clickToElementByIndex(popularCategories, 1);
+        popularCategoriesMenu.selectCategoryByIndex(0);
+        String popularCategoryText = popularCategoriesMenu.getElementTextByIndex(popularCategoriesMenu.getPopularCategories(), 0);
 
         // Verify URL
         String urlExpected = pageUrl + PageURL.SEARCH_URL + "?keyword=" + popularCategoryText.toLowerCase();
@@ -93,13 +89,12 @@ public class PopularCategoriesMenuTest extends BaseTest {
         Assert.assertEquals(urlExpected, urlActual);
 
         // Verify first 10 products have relevant content
-        List<WebElement> products = popularCategoriesMenu.getElementWithLimitNumber(
-                popularCategoriesMenu.getElements(driver,  By.className(PopularCategoriesMenuUI.PRODUCT_CARDS_CLASS_NAME)),
+        List<WebElement> productTitles = popularCategoriesMenu.getElementWithLimitNumber(
+                popularCategoriesMenu.getElements(driver, By.xpath(PopularCategoriesMenuUI.PRODUCT_CARD_TITLE_XPATH)),
                 10);
 
-        for (WebElement product: products) {
-            boolean isProductTitleContainsKeyword = popularCategoriesMenu.isContainsKeyword(popularCategoryText,
-                    popularCategoriesMenu.getProductCardTitleByCard(product));
+        for (WebElement title: productTitles) {
+            boolean isProductTitleContainsKeyword = popularCategoriesMenu.isContainsKeyword(popularCategoryText, title.getText());
             Assert.assertTrue(isProductTitleContainsKeyword);
         }
     }

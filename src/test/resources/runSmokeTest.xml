@@ -4,15 +4,18 @@
 <suite name="Run Smoke Test for PoC Project" parallel="false">
 
     <parameter name="pageUrl" value="https://shopee.vn/"/>
-    
-<!--    <listeners>-->
-<!--        <listener class-name="com.epam.poc.utilities.listeners.TestListener"/>-->
-<!--    </listeners>-->
 
     <test name="Run on CHROME">
         <parameter name="browserName" value="chrome"/>
         <classes>
-            <class name="com.epam.poc.homePage.HomePageTest"/>
+            <class name="com.epam.poc.homePage.PopularCategoriesMenuTest"/>
+        </classes>
+    </test>
+
+    <test name="Run on FIREFOX">
+        <parameter name="browserName" value="firefox"/>
+        <classes>
+            <class name="com.epam.poc.homePage.PopularCategoriesMenuTest"/>
         </classes>
     </test>
 </suite>

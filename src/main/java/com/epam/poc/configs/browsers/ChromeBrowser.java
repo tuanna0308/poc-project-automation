@@ -16,6 +16,7 @@ public class ChromeBrowser {
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("window-size=1920x1080");
 
         return new ChromeDriver(options);
     }

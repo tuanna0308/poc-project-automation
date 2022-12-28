@@ -5,7 +5,6 @@ import com.epam.poc.utilities.RandomUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -26,20 +25,15 @@ public class CategoriesTilesSectionObject extends BasePage {
         return lstElement.get(randomUtil.getRandomNumberInBorder(lstElement.size()));
     }
 
-    public void verifyClickCategoryHomePage(By by) {
-        WebElement element = getElement(driver, by);
-        clickForwardButtonIfElementNotDisplay(element);
-        waitForElementUntilVisible(driver, element);
-        String expectedCategory = getElementText(element);
-        clickToElement(driver, by);
-        waitForElementUntilVisible(driver, By.cssSelector(MAIN_CATEGORY_CSS));
-        Assert.assertEquals(expectedCategory, getElementText(driver, By.cssSelector(MAIN_CATEGORY_CSS)));
-    }
-
     public void clickForwardButtonIfElementNotDisplay(WebElement element) {
         if (!element.isDisplayed()) {
             clickToElementByJS(driver, By.xpath(HOME_CATEGORY_LIST_FORWARD_ARROWS_XPATH));
         }
         waitForElementUntilVisible(driver, element);
+    }
+
+    public String getCategoryTextHomePage(WebElement element) {
+        clickForwardButtonIfElementNotDisplay(element);
+        return getElementText(element);
     }
 }

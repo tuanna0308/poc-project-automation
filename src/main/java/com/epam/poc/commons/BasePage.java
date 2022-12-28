@@ -70,6 +70,15 @@ public class BasePage {
         getElement(driver, by).click();
     }
 
+    public void clickToElement(WebElement element) {
+        element.click();
+    }
+
+    public void waitAndClickToElement(WebDriver driver, By by) {
+        waitForElementUntilClickable(driver, by);
+        clickToElement(driver, by);
+    }
+
     public void scrollToElementByJS(WebDriver driver, By by) {
         String script = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
                 + "var elementTop = arguments[0].getBoundingClientRect().top;"
@@ -144,7 +153,7 @@ public class BasePage {
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         }
         catch (Exception e) {
-            logger.info("Element is visibility");
+            logger.info("Element is invisibility");
         }
     }
     public void waitForElementUntilVisible(WebDriver driver, WebElement element){
@@ -153,7 +162,7 @@ public class BasePage {
             wait.until(ExpectedConditions.visibilityOf(element));
         }
         catch (Exception e) {
-            logger.info("Element is visibility");
+            logger.info("Element is invisibility");
         }
     }
 

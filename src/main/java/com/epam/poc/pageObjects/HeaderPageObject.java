@@ -12,7 +12,4 @@ public class HeaderPageObject extends BasePage {
         this.driver = driver;
     }
 
-    public void clickJoinAsSellerHyperlink() {
-        clickToElement(driver, By.cssSelector(HeaderPageUI.JOIN_AS_SELLER_HYPERLINK_CSS));
-    }
 }

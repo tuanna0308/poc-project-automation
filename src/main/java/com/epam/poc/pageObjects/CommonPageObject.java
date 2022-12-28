@@ -11,8 +11,4 @@ public class CommonPageObject extends BasePage {
     public CommonPageObject(WebDriver driver) {
         this.driver = driver;
     }
-
-    public void clickShopeeLogo() {
-        clickToElement(driver, By.cssSelector(CommonPageUI.SHOPEE_LOGO_CSS));
-    }
 }

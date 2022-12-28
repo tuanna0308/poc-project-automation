@@ -183,4 +183,14 @@ public class BasePage {
     public void navigateToPreviousPage(WebDriver driver){
         driver.navigate().back();
     }
+
+    public void waitForPageTitleAsExpectedText(WebDriver driver, String pageTitleValue) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
+            wait.until(ExpectedConditions.titleIs(pageTitleValue));
+        }
+        catch (Exception e) {
+            logger.info("Page title is not the same as expected text");
+        }
+    }
 }

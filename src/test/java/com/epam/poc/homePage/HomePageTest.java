@@ -1,7 +1,6 @@
 package com.epam.poc.homePage;
 
 import com.epam.poc.commons.BaseTest;
-import com.epam.poc.pageObjects.CommonPageObject;
 import com.epam.poc.pageObjects.homepage.HomePageObject;
 import com.epam.poc.pageObjects.HeaderPageObject;
 import com.epam.poc.pageUIs.CommonPageUI;
@@ -26,14 +25,12 @@ import org.testng.annotations.Test;
 public class HomePageTest extends BaseTest {
 
     private HomePageObject homePage;
-    private CommonPageObject commonPage;
     private HeaderPageObject headerPage;
 
     @BeforeMethod
     public void beforeMethod() {
         homePage = new HomePageObject(driver);
         headerPage = new HeaderPageObject(driver);
-        commonPage = new CommonPageObject(driver);
 
         homePage.closeHomePagePopup();
     }
@@ -46,14 +43,14 @@ public class HomePageTest extends BaseTest {
     public void verifyHomeButtonInAnyPage(String pageUrl) {
         // Verify other page which has Home button
         headerPage.clickToElement(driver, By.cssSelector(HeaderPageUI.JOIN_AS_SELLER_HYPERLINK_CSS));
-        commonPage.staticWait(3);
         String sellerTitleExpected = "Đăng Ký Bán Hàng Trên Shopee Ngay Hôm Nay - Hỗ Trợ Miễn Phí Cho Người Bán Mới";
+        homePage.waitForPageTitleAsExpectedText(driver, sellerTitleExpected);
         Assert.assertEquals(homePage.getPageTitle(driver), sellerTitleExpected);
         String sellerUrlExpected = pageUrl + "m/dang-ky-ban-hang-shopee";
         Assert.assertEquals(homePage.getCurrentUrl(driver), sellerUrlExpected);
 
         // Verify Shoppe Home button
-        commonPage.clickToElement(driver, By.cssSelector(CommonPageUI.SHOPEE_LOGO_CSS));
+        homePage.clickToElement(driver, By.cssSelector(CommonPageUI.SHOPEE_LOGO_CSS));
         String homeTitleExpected = "Shopee Việt Nam | Mua và Bán Trên Ứng Dụng Di Động Hoặc Website";
         Assert.assertEquals(homePage.getPageTitle(driver), homeTitleExpected);
         Assert.assertEquals(homePage.getCurrentUrl(driver), pageUrl);
@@ -66,9 +63,9 @@ public class HomePageTest extends BaseTest {
     @Parameters({"pageUrl"})
     public void verifyHomeButtonInHomePage(String pageUrl) {
         // Verify click on the Shopee logo
-        commonPage.clickToElement(driver, By.cssSelector(CommonPageUI.SHOPEE_LOGO_CSS));
-        commonPage.staticWait(3);
+        homePage.clickToElement(driver, By.cssSelector(CommonPageUI.SHOPEE_LOGO_CSS));
         String homeTitleExpected = "Shopee Việt Nam | Mua và Bán Trên Ứng Dụng Di Động Hoặc Website";
+        homePage.waitForPageTitleAsExpectedText(driver, homeTitleExpected);
         Assert.assertEquals(homePage.getPageTitle(driver), homeTitleExpected);
         Assert.assertEquals(homePage.getCurrentUrl(driver), pageUrl);
     }

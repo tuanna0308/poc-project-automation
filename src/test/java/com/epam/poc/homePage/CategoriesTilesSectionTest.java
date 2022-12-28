@@ -19,27 +19,24 @@ import static com.epam.poc.pageUIs.homepage.CategoriesTilesSectionUI.*;
 public class CategoriesTilesSectionTest extends BaseTest {
 
     private CategoriesTilesSectionObject categoriesTilesSection;
-    private HomePageObject homePageObject;
     private RandomUtil randomUtil;
 
     @BeforeMethod
     public void beforeMethod() {
         categoriesTilesSection = new CategoriesTilesSectionObject(driver);
-        homePageObject = new HomePageObject(driver);
+        homePage = new HomePageObject(driver);
         randomUtil = new RandomUtil();
+
+        homePage.closeHomePagePopup();
     }
 
-    @Test(priority = 2)
-    @Severity(SeverityLevel.NORMAL)
+    @Test
     @Description("Test description: Verify random category in Home Page")
     @Story("Categories tiles section")
     @Parameters({"pageUrl"})
     public void verifyRandomCategoryHomePage() {
         //Click shopee icon to back to homepage
         categoriesTilesSection.clickToElement(driver, By.cssSelector(SHOPEE_ICON_CSS));
-
-        //Close popup
-        homePageObject.closeHomePagePopup();
 
         //get a random category
         WebElement randomCategory = categoriesTilesSection.getRandomCategory();
@@ -61,15 +58,12 @@ public class CategoriesTilesSectionTest extends BaseTest {
         }
     }
 
-    @Test(priority = 1)
-    @Severity(SeverityLevel.NORMAL)
+    @Test
     @Description("Test description: Verify forward and back arrows in Home Page")
     @Story("Categories tiles section")
     @Parameters({"pageUrl"})
     public void verifyForwardAndBackArrowsHomePage() {
-        //Close popup
-        homePageObject.closeHomePagePopup();
-        homePageObject.staticWait(1);
+        homePage.staticWait(1);
 
         //check when click forward button
         categoriesTilesSection.scrollThenClickToElement(driver, By.xpath(HOME_CATEGORY_LIST_FORWARD_ARROWS_XPATH));
@@ -85,7 +79,7 @@ public class CategoriesTilesSectionTest extends BaseTest {
 
 
         categoriesTilesSection.navigateToPreviousPage(driver);
-        homePageObject.closeHomePagePopup();
+        homePage.closeHomePagePopup();
 
         categoriesTilesSection.scrollThenClickToElement(driver, By.xpath(HOME_CATEGORY_LIST_FORWARD_ARROWS_XPATH));
         //check when click back button

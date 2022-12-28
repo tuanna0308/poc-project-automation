@@ -24,7 +24,6 @@ import org.testng.annotations.Test;
 @Feature("HomePage")
 public class HomePageTest extends BaseTest {
 
-    private HomePageObject homePage;
     private HeaderPageObject headerPage;
 
     @BeforeMethod
@@ -35,8 +34,7 @@ public class HomePageTest extends BaseTest {
         homePage.closeHomePagePopup();
     }
 
-    @Test(priority = 2)
-    @Severity(SeverityLevel.NORMAL)
+    @Test
     @Description("Test description: Verify 'Home' button in any page ")
     @Story("Home Button")
     @Parameters({"pageUrl"})
@@ -56,8 +54,7 @@ public class HomePageTest extends BaseTest {
         Assert.assertEquals(homePage.getCurrentUrl(driver), pageUrl);
     }
 
-    @Test(priority = 2)
-    @Severity(SeverityLevel.NORMAL)
+    @Test
     @Description("Test description: Verify 'Home' button in Home page ")
     @Story("Home Button")
     @Parameters({"pageUrl"})

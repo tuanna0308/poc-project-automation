@@ -24,7 +24,6 @@ import java.util.List;
 public class PopularCategoriesMenuTest extends BaseTest {
 
     private PopularCategoriesMenuObject popularCategoriesMenu;
-    private HomePageObject homePage;
 
     @BeforeMethod
     public void beforeMethod() {
@@ -33,8 +32,7 @@ public class PopularCategoriesMenuTest extends BaseTest {
         homePage.closeHomePagePopup();
     }
 
-    @Test(priority = 2)
-    @Severity(SeverityLevel.CRITICAL)
+    @Test
     @Description("Test description: Verify relevant information display")
     @Story("Popular categories menu")
     @Parameters({"pageUrl"})
@@ -71,8 +69,7 @@ public class PopularCategoriesMenuTest extends BaseTest {
                 popularCategoriesMenu.getElementByAttribute(driver, By.xpath(PopularCategoriesMenuUI.SEARCH_INPUT_XPATH), "value").toLowerCase());
     }
 
-    @Test(priority = 2)
-    @Severity(SeverityLevel.CRITICAL)
+    @Test
     @Description("Test description: Verify first 10 products have relevant content")
     @Story("Popular categories menu")
     @Parameters({"pageUrl"})

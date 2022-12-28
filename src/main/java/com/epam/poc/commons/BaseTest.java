@@ -1,6 +1,7 @@
 package com.epam.poc.commons;
 
 import com.epam.poc.configs.drivers.DriverConfig;
+import com.epam.poc.pageObjects.homepage.HomePageObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,8 @@ import org.testng.annotations.Parameters;
 
 public class BaseTest {
     protected static WebDriver driver = null;
+
+    protected HomePageObject homePage;
 
     protected Logger logger;
 
@@ -24,6 +27,8 @@ public class BaseTest {
 
         driver = DriverConfig.getDriver(browserName);
         driver.get(pageUrl);
+
+        homePage = new HomePageObject(driver);
     }
 
     @AfterClass(alwaysRun = true)

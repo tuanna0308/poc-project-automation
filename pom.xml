@@ -125,7 +125,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <file>src/test/resources/runSmokeTest.xml</file>
+                        <file>src/test/resources/runRegressionTest.xml</file>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"

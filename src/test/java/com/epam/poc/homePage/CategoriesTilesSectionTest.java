@@ -1,7 +1,7 @@
 package com.epam.poc.homePage;
 
 import com.epam.poc.commons.BaseTest;
-import com.epam.poc.pageObjects.HomePageObject;
+import com.epam.poc.pageObjects.homepage.HomePageObject;
 import com.epam.poc.pageObjects.homepage.CategoriesTilesSectionObject;
 import com.epam.poc.utilities.RandomUtil;
 import com.epam.poc.utilities.listeners.TestListener;
@@ -91,8 +91,8 @@ public class CategoriesTilesSectionTest extends BaseTest {
         //check when click back button
         categoriesTilesSection.waitAndClickToElement(driver, By.xpath(HOME_CATEGORY_LIST_BACK_ARROWS_XPATH));
         categoriesTilesSection.waitForElementUntilVisible(driver, By.xpath(HOME_CATEGORY_LIST_FORWARD_ARROWS_XPATH));
-        Assert.assertFalse(categoriesTilesSection.isElementDisplayed(driver, By.xpath(HOME_CATEGORY_LIST_BACK_ARROWS_XPATH)));
         Assert.assertTrue(categoriesTilesSection.isElementDisplayed(driver, By.xpath(HOME_CATEGORY_LIST_FORWARD_ARROWS_XPATH)));
+        Assert.assertFalse(categoriesTilesSection.isElementDisplayed(driver, By.xpath(HOME_CATEGORY_LIST_BACK_ARROWS_XPATH)));
         //verify first element of category list
         WebElement firstElement = categoriesTilesSection.getElement(driver, By.xpath(FIRST_CATEGORY_HOMEPAGE_XPATH));
         String categoryText1 = categoriesTilesSection.getCategoryTextHomePage(firstElement);

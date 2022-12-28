@@ -19,7 +19,7 @@ import java.net.URLDecoder;
 import java.util.List;
 
 @Listeners({TestListener.class})
-@Epic("Smoke test")
+@Epic("Regression test")
 @Feature("HomePage")
 public class PopularCategoriesMenuTest extends BaseTest {
 

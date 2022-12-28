@@ -49,6 +49,10 @@ public class BasePage {
         return getElement(driver, by).getText();
     }
 
+    public String getElementText(WebElement element) {
+        return element.getText();
+    }
+
     public String getElementTextByIndex(List<WebElement> elements, int index) {
         return elements.get(index).getText();
     }
@@ -68,6 +72,28 @@ public class BasePage {
 
     public void clickToElement(WebDriver driver, By by) {
         getElement(driver, by).click();
+    }
+
+    public void clickToElement(WebElement element) {
+        element.click();
+    }
+
+    public void waitAndClickToElement(WebDriver driver, By by) {
+        waitForElementUntilClickable(driver, by);
+        clickToElement(driver, by);
+    }
+
+    public void scrollToElementByJS(WebDriver driver, By by) {
+        String script = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+                + "var elementTop = arguments[0].getBoundingClientRect().top;"
+                + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+        ((JavascriptExecutor) driver).executeScript(script, getElement(driver,by));
+    }
+
+    public void scrollThenClickToElement(WebDriver driver, By by) {
+        scrollToElementByJS(driver,by);
+        waitForElementUntilClickable(driver,getElement(driver,by));
+        clickToElement(driver, by);
     }
 
     public void clickToElementByIndex(List<WebElement> elements, int index) {
@@ -105,6 +131,16 @@ public class BasePage {
         }
     }
 
+    public void waitForElementUntilClickable(WebDriver driver, By by){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
+            wait.until(ExpectedConditions.elementToBeClickable(by));
+        }
+        catch (Exception e) {
+            logger.info("Element not clickable");
+        }
+    }
+
     public void waitForElementUntilInvisible(WebDriver driver, WebElement element){
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
@@ -113,6 +149,39 @@ public class BasePage {
         catch (Exception e) {
             logger.info("Element is visibility");
         }
+    }
+
+    public void waitForElementUntilVisible(WebDriver driver, By by){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+        }
+        catch (Exception e) {
+            logger.info("Element is invisibility");
+        }
+    }
+    public void waitForElementUntilVisible(WebDriver driver, WebElement element){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
+            wait.until(ExpectedConditions.visibilityOf(element));
+        }
+        catch (Exception e) {
+            logger.info("Element is invisibility");
+        }
+    }
+
+    public void clickToElementByJS(WebDriver driver, WebElement element) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public void clickToElementByJS(WebDriver driver, By by) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", getElement(driver,by));
+    }
+
+    public void navigateToPreviousPage(WebDriver driver){
+        driver.navigate().back();
     }
 
     public void waitForPageTitleAsExpectedText(WebDriver driver, String pageTitleValue) {

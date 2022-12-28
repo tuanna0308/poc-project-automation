@@ -1,7 +1,7 @@
 package com.epam.poc.homePage;
 
 import com.epam.poc.commons.BaseTest;
-import com.epam.poc.pageObjects.HomePageObject;
+import com.epam.poc.pageObjects.homepage.HomePageObject;
 import com.epam.poc.pageObjects.homepage.PopularCategoriesMenuObject;
 import com.epam.poc.pageUIs.homepage.PopularCategoriesMenuUI;
 import com.epam.poc.utilities.constants.PageURL;

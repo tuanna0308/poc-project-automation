@@ -1,4 +1,4 @@
-package com.epam.poc.pageUIs;
+package com.epam.poc.pageUIs.homepage;
 
 public class HomePageUI {
     public static final String AO_KHOAC_LINK_XPATH = "//*[@class='header-with-search__search-section']//a[text()='Áo Khoác']";

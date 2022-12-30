@@ -38,13 +38,10 @@ steps:
 
 - task: AllureGenerate@1
   inputs:
-    resultsDir: '**/allure-results'
-    targetDir: '**/allure-report/$(Build.BuildNumber)'
+    resultsDir: 'allure-results'
+    targetDir: 'allure-report/$(Build.BuildNumber)'
 
-- task: PublishTestResults@2
-  displayName: Publish Allure test results
+- task: CmdLine@2
   inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'file*.extension'
-    searchFolder: 'allure-report/$(Build.BuildNumber)'
-    testRunTitle: Allure test results for $(Build.BuildNumber)
+    script: |
+      allure report open

@@ -44,4 +44,4 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      allure report open
+      ls /home/vsts/work/1/s/**/allure-report/$(Build.BuildNumber)

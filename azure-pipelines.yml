@@ -38,7 +38,7 @@ steps:
 
 - task: AllureGenerate@1
   inputs:
-    resultsDir: 'allure-results'
+    resultsDir: '**/allure-results'
     targetDir: 'allure-report/$(Build.BuildNumber)'
 
 - task: CmdLine@2

@@ -40,3 +40,11 @@ steps:
   inputs:
     resultsDir: '**/allure-results'
     targetDir: '**/allure-report/$(Build.BuildNumber)'
+
+- task: PublishTestResults@2
+  displayName: Publish Allure test results
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'file*.extension'
+    searchFolder: 'allure-report/$(Build.BuildNumber)'
+    testRunTitle: Allure test results for $(Build.BuildNumber)

@@ -45,3 +45,9 @@ steps:
   inputs:
     script: |
       ls /home/vsts/work/1/s/allure-report/$(Build.BuildNumber)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '/home/vsts/work/1/s/allure-report/$(Build.BuildNumber)'
+    ArtifactName: 'Allure report'
+    publishLocation: 'Container'

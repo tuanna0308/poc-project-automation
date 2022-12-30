@@ -5,7 +5,7 @@ import com.epam.poc.pageObjects.homepage.HomePageObject;
 import com.epam.poc.pageObjects.homepage.CategoriesTilesSectionObject;
 import com.epam.poc.utilities.RandomUtil;
 import com.epam.poc.utilities.listeners.TestListener;
-import io.qameta.allure.*;
+import ru.yandex.qatools.allure.annotations.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -14,8 +14,8 @@ import org.testng.annotations.*;
 import static com.epam.poc.pageUIs.homepage.CategoriesTilesSectionUI.*;
 
 @Listeners({TestListener.class})
-@Epic("Regression test")
-@Feature("HomePage")
+@Title("Regression test")
+@Features("HomePage")
 public class CategoriesTilesSectionTest extends BaseTest {
 
     private CategoriesTilesSectionObject categoriesTilesSection;
@@ -32,7 +32,7 @@ public class CategoriesTilesSectionTest extends BaseTest {
 
     @Test
     @Description("Test description: Verify random category in Home Page")
-    @Story("Categories tiles section")
+    @Stories("Categories tiles section")
     @Parameters({"pageUrl"})
     public void verifyRandomCategoryHomePage() {
         //Click shopee icon to back to homepage
@@ -60,7 +60,7 @@ public class CategoriesTilesSectionTest extends BaseTest {
 
     @Test
     @Description("Test description: Verify forward and back arrows in Home Page")
-    @Story("Categories tiles section")
+    @Stories("Categories tiles section")
     @Parameters({"pageUrl"})
     public void verifyForwardAndBackArrowsHomePage() {
         homePage.staticWait(1);

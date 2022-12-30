@@ -6,12 +6,7 @@ import com.epam.poc.pageObjects.HeaderPageObject;
 import com.epam.poc.pageUIs.CommonPageUI;
 import com.epam.poc.pageUIs.HeaderPageUI;
 import com.epam.poc.utilities.listeners.TestListener;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
+import ru.yandex.qatools.allure.annotations.*;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -20,8 +15,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
-@Epic("Regression test")
-@Feature("HomePage")
+@Title("Regression test")
+@Features("HomePage")
 public class HomePageTest extends BaseTest {
 
     private HeaderPageObject headerPage;
@@ -36,7 +31,7 @@ public class HomePageTest extends BaseTest {
 
     @Test
     @Description("Test description: Verify 'Home' button in any page ")
-    @Story("Home Button")
+    @Stories("Home Button")
     @Parameters({"pageUrl"})
     public void verifyHomeButtonInAnyPage(String pageUrl) {
         // Verify other page which has Home button
@@ -56,7 +51,7 @@ public class HomePageTest extends BaseTest {
 
     @Test
     @Description("Test description: Verify 'Home' button in Home page ")
-    @Story("Home Button")
+    @Stories("Home Button")
     @Parameters({"pageUrl"})
     public void verifyHomeButtonInHomePage(String pageUrl) {
         // Verify click on the Shopee logo

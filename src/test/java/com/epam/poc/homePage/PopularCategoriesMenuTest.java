@@ -6,7 +6,7 @@ import com.epam.poc.pageObjects.homepage.PopularCategoriesMenuObject;
 import com.epam.poc.pageUIs.homepage.PopularCategoriesMenuUI;
 import com.epam.poc.utilities.constants.PageURL;
 import com.epam.poc.utilities.listeners.TestListener;
-import io.qameta.allure.*;
+import ru.yandex.qatools.allure.annotations.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -19,8 +19,8 @@ import java.net.URLDecoder;
 import java.util.List;
 
 @Listeners({TestListener.class})
-@Epic("Regression test")
-@Feature("HomePage")
+@Title("Regression test")
+@Features("HomePage")
 public class PopularCategoriesMenuTest extends BaseTest {
 
     private PopularCategoriesMenuObject popularCategoriesMenu;
@@ -34,7 +34,7 @@ public class PopularCategoriesMenuTest extends BaseTest {
 
     @Test
     @Description("Test description: Verify relevant information display")
-    @Story("Popular categories menu")
+    @Stories("Popular categories menu")
     @Parameters({"pageUrl"})
     public void verifyRelevantInformationDisplay(String pageUrl) {
 
@@ -71,7 +71,7 @@ public class PopularCategoriesMenuTest extends BaseTest {
 
     @Test
     @Description("Test description: Verify first 10 products have relevant content")
-    @Story("Popular categories menu")
+    @Stories("Popular categories menu")
     @Parameters({"pageUrl"})
     public void verifyFirstTenProductsWithRelevantInformation(String pageUrl) {
 

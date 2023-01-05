@@ -22,6 +22,8 @@
         <allure-testng-version>1.5.4</allure-testng-version>
         <allure-maven-version>2.12.0</allure-maven-version>
         <allure-version>2.20.1</allure-version>
+        <jaxb-api-version>2.3.1</jaxb-api-version>
+        <jaxb-core-version>2.3.0.1</jaxb-core-version>
     </properties>
 
     <dependencies>
@@ -105,6 +107,27 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>${aspectj.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb-api-version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-core -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>${jaxb-core-version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jaxb-api-version}</version>
         </dependency>
 
     </dependencies>

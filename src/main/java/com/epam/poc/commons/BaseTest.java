@@ -24,6 +24,7 @@ public class BaseTest {
     @BeforeClass
     public void setUp(String pageUrl, String browserName) {
         logger.info("Page Url: " + pageUrl + " with browser name: " + browserName);
+        logger.info("Check variable isHeadless = " + System.getProperty("isHeadless", "false"));
 
         driver = DriverConfig.getDriver(browserName);
         driver.get(pageUrl);

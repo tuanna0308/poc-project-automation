@@ -11,7 +11,7 @@
             <package name="com.epam.poc.homePage"/>
         </packages>
 <!--        <classes>-->
-<!--            <class name="com.epam.poc.homePage.PopularCategoriesMenuTest"/>-->
+<!--            <class name="com.epam.poc.homePage.TopLeftNavigationMenuTest"/>-->
 <!--        </classes>-->
     </test>
 
@@ -21,7 +21,7 @@
             <package name="com.epam.poc.homePage"/>
         </packages>
 <!--        <classes>-->
-<!--            <class name="com.epam.poc.homePage.PopularCategoriesMenuTest"/>-->
+<!--            <class name="com.epam.poc.homePage.TopLeftNavigationMenuTest"/>-->
 <!--        </classes>-->
     </test>
 </suite>

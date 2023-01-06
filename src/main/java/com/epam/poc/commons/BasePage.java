@@ -13,13 +13,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class BasePage {
     protected Logger logger;
-   private PropertyReader propertyReader = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY);
+    private PropertyReader propertyReader = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY);
 
     protected BasePage() {
         logger = LogManager.getLogger(getClass());
@@ -40,7 +41,7 @@ public class BasePage {
 
     public WebElement getElementByJavascriptExecutor(WebDriver driver, String executeScript) {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
-        return  (WebElement) jse.executeScript(executeScript);
+        return (WebElement) jse.executeScript(executeScript);
     }
 
 
@@ -95,6 +96,10 @@ public class BasePage {
         builder.moveToElement(getElement(driver, by)).click().perform();
     }
 
+    public void hoverElement(WebDriver driver, By by) {
+        new Actions(driver).moveToElement(getElement(driver, by)).perform();
+    }
+
     public void waitAndClickToElement(WebDriver driver, By by) {
         waitForElementUntilClickable(driver, by);
         clickToElement(driver, by);
@@ -104,7 +109,7 @@ public class BasePage {
         String script = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
                 + "var elementTop = arguments[0].getBoundingClientRect().top;"
                 + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
-        ((JavascriptExecutor) driver).executeScript(script, getElement(driver,by));
+        ((JavascriptExecutor) driver).executeScript(script, getElement(driver, by));
     }
 
     public void scrollToBottom(WebDriver driver) {
@@ -118,8 +123,8 @@ public class BasePage {
     }
 
     public void scrollThenClickToElement(WebDriver driver, By by) {
-        scrollToElementByJS(driver,by);
-        waitForElementUntilClickable(driver,getElement(driver,by));
+        scrollToElementByJS(driver, by);
+        waitForElementUntilClickable(driver, getElement(driver, by));
         clickToElement(driver, by);
     }
 
@@ -131,12 +136,11 @@ public class BasePage {
         return getElement(driver, by).isDisplayed();
     }
 
-    public void waitForPageLoadedCompletely(WebDriver driver){
+    public void waitForPageLoadedCompletely(WebDriver driver) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
-            wait.until( wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
-        }
-        catch (Exception e) {
+            wait.until(wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
+        } catch (Exception e) {
             logger.info("Page is not completed loaded.");
         }
     }
@@ -148,32 +152,30 @@ public class BasePage {
             logger.info("Error in staticWait" + e);
         }
     }
-    public void waitForElementUntilClickable(WebDriver driver, WebElement element){
+
+    public void waitForElementUntilClickable(WebDriver driver, WebElement element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.elementToBeClickable(element));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.info("Element not clickable");
         }
     }
 
-    public void waitForElementUntilClickable(WebDriver driver, By by){
+    public void waitForElementUntilClickable(WebDriver driver, By by) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.elementToBeClickable(by));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.info("Element not clickable");
         }
     }
 
-    public void waitForElementUntilInvisible(WebDriver driver, WebElement element){
+    public void waitForElementUntilInvisible(WebDriver driver, WebElement element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.invisibilityOf(element));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.info("Element is visibility");
         }
     }
@@ -188,21 +190,20 @@ public class BasePage {
         }
     }
 
-    public void waitForElementUntilVisible(WebDriver driver, By by){
+    public void waitForElementUntilVisible(WebDriver driver, By by) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.info("Element is invisibility");
         }
     }
-    public void waitForElementUntilVisible(WebDriver driver, WebElement element){
+
+    public void waitForElementUntilVisible(WebDriver driver, WebElement element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.visibilityOf(element));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.info("Element is invisibility");
         }
     }
@@ -214,10 +215,10 @@ public class BasePage {
 
     public void clickToElementByJS(WebDriver driver, By by) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", getElement(driver,by));
+        executor.executeScript("arguments[0].click();", getElement(driver, by));
     }
 
-    public void navigateToPreviousPage(WebDriver driver){
+    public void navigateToPreviousPage(WebDriver driver) {
         driver.navigate().back();
     }
 
@@ -225,8 +226,7 @@ public class BasePage {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.titleIs(pageTitleValue));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.info("Page title is not the same as expected text");
         }
     }
@@ -248,5 +248,19 @@ public class BasePage {
             logger.info("A malformed URL has occurred.");
             return null;
         }
+    }
+
+    public void switchToLastTab(WebDriver driver) {
+        ArrayList<String> tabs = new ArrayList(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(tabs.size() - 1));
+    }
+
+    public void switchToFirstTab(WebDriver driver) {
+        ArrayList<String> tabs = new ArrayList(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(0));
+    }
+
+    public void closeCurrentTab(WebDriver driver) {
+        driver.close();
     }
 }

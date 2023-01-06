@@ -11,10 +11,13 @@ public class FirefoxBrowser {
         WebDriverManager.firefoxdriver().setup();
 
         FirefoxOptions options = new FirefoxOptions();
+
         // Set options for Firefox browser
-        options.addArguments("--headless");
-        options.addArguments("--disable-gpu");
-        options.addArguments("window-size=1920x1080");
+        if (Boolean.parseBoolean(System.getProperty("isHeadless", "false"))) {
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("window-size=1920x1080");
+        }
 
         return new FirefoxDriver(options);
     }

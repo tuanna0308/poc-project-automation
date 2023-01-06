@@ -11,12 +11,14 @@ public class ChromeBrowser {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
+
         // Set options for Chrome browser
-        options.addArguments("--lang=vi");
-        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("window-size=1920x1080");
+        if (Boolean.parseBoolean(System.getProperty("isHeadless", "false"))) {
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("window-size=1920x1080");
+        }
 
         return new ChromeDriver(options);
     }

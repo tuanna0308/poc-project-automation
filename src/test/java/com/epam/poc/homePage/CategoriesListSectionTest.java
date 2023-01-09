@@ -56,6 +56,8 @@ public class CategoriesListSectionTest extends BaseTest {
     @Story("Categories list section")
     @Parameters({"pageUrl"})
     public void verifySubCategoriesLink() {
+        //Back to homepage and close popup
+        homePage.clickShopeeLogo().closeHomePagePopup();
         //Scroll to category list section, click random category and get name
         categoriesListSection.scrollToBottom(driver);
         String expectedCategory = categoriesListSection.clickRandomCategoryAndGetName(By.xpath(SUB_CATEGORY_XPATH), "sub-category")
@@ -71,11 +73,5 @@ public class CategoriesListSectionTest extends BaseTest {
         String mainCategoryText = categoriesListSection.getElementText(driver, By.xpath(SELECTED_CATEGORY_XPATH))
                 .toLowerCase();
         Assert.assertEquals(expectedCategory, mainCategoryText);
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        homePage.clickShopeeLogo();
-        homePage.closeHomePagePopup();
     }
 }

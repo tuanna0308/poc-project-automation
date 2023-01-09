@@ -38,4 +38,9 @@ public class HomePageObject extends BasePage {
         return this;
     }
 
+    @Step("Scroll down to Top Products section")
+    public HomePageObject loadTopProductsSection() {
+        scrollDownByOffset(driver, 1500);
+        return this;
+    }
 }

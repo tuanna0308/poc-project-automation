@@ -112,6 +112,11 @@ public class BasePage {
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
 
+    public void scrollDownByOffset(WebDriver driver, int offset) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0," + offset + ")");
+    }
+
     public void scrollThenClickToElement(WebDriver driver, By by) {
         scrollToElementByJS(driver,by);
         waitForElementUntilClickable(driver,getElement(driver,by));

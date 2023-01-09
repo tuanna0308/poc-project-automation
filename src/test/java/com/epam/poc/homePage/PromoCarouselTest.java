@@ -22,7 +22,6 @@ public class PromoCarouselTest extends BaseTest {
     }
 
     @Test()
-    @Severity(SeverityLevel.CRITICAL)
     @Description("Test description: Verify promo details page")
     @Story("Promo Carousel (dots)")
     public void verifyPromoDetailsPage() {
@@ -33,7 +32,6 @@ public class PromoCarouselTest extends BaseTest {
     }
 
     @Test()
-    @Severity(SeverityLevel.CRITICAL)
     @Description("Test description: Verify the navigation among promos")
     @Story("Promo Carousel (dots)")
     @Parameters("browserName")

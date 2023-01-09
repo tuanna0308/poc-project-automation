@@ -31,6 +31,7 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
     goals: 'allure:report'
 
 - task: PublishBuildArtifacts@1

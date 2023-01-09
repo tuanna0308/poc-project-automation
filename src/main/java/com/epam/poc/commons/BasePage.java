@@ -193,4 +193,13 @@ public class BasePage {
             logger.info("Page title is not the same as expected text");
         }
     }
+    public void waitForElementContainsText(WebDriver driver, WebElement element, String text){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.SHORT_TIMEOUT_KEY)));
+            wait.until(ExpectedConditions.textToBePresentInElement(element,text));
+        }
+        catch (Exception e) {
+            logger.info("Element doesn't contain expected text");
+        }
+    }
 }

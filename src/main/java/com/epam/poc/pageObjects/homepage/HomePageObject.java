@@ -1,6 +1,7 @@
 package com.epam.poc.pageObjects.homepage;
 
 import com.epam.poc.commons.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -12,6 +13,7 @@ public class HomePageObject extends BasePage {
         this.driver = driver;
     }
 
+    @Step("Close the first home page popup when opening 'shopee.vn'")
     public void closeHomePagePopup() {
         try {
             waitForPageLoadedCompletely(driver);

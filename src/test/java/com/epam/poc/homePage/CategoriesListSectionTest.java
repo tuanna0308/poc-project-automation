@@ -56,7 +56,7 @@ public class CategoriesListSectionTest extends BaseTest {
     @Story("Categories list section")
     @Parameters({"pageUrl"})
     public void verifySubCategoriesLink() {
-        //scroll to category list section, click random category and get name
+        //Scroll to category list section, click random category and get name
         categoriesListSection.scrollToBottom(driver);
         String expectedCategory = categoriesListSection.clickRandomCategoryAndGetName(By.xpath(SUB_CATEGORY_XPATH), "sub-category")
                 .toLowerCase();

@@ -1,7 +1,7 @@
 package com.epam.poc.utilities.listeners;
 
 import com.epam.poc.commons.BaseTest;
-import ru.yandex.qatools.allure.annotations.Attachment;
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;

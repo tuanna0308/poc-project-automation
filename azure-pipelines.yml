@@ -11,10 +11,10 @@ pool:
 
 steps:
 - task: Maven@3
+  displayName: execute tests
   continueOnError: true
   inputs:
     mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
@@ -23,33 +23,19 @@ steps:
     goals: 'test'
     options: '-DisHeadless="true"'
 
-- task: NodeTool@0
+- task: Maven@3
+  displayName: generate report
+  continueOnError: true
   inputs:
-    versionSource: 'spec'
-    versionSpec: '19.x'
-    checkLatest: true
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo '-----Fix-----'
-      ls -ld /home/vsts/work/_tasks
-      chmod -R 777 /home/vsts/work/_tasks
-      ls -ld /home/vsts/work/_tasks
-      ls target/allure-results/
-
-- task: AllureGenerate@1
-  inputs:
-    resultsDir: '**/allure-results'
-    targetDir: 'allure-report/$(Build.BuildNumber)'
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      ls /home/vsts/work/1/s/allure-report/$(Build.BuildNumber)
+    mavenPomFile: 'pom.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    goals: 'allure:report'
 
 - task: PublishBuildArtifacts@1
+  displayName: export report
   inputs:
-    PathtoPublish: '/home/vsts/work/1/s/allure-report/$(Build.BuildNumber)'
-    ArtifactName: 'Allure report'
+    PathtoPublish: '/home/vsts/work/1/s/target/site/allure-maven-plugin/'
+    ArtifactName: 'allure-report'
     publishLocation: 'Container'

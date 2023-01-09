@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -53,6 +54,14 @@ public class BasePage {
         return element.getText();
     }
 
+    public String getElementAttribute(WebElement element, String attribute) {
+        return element.getAttribute(attribute);
+    }
+
+    public String getElementAttribute(WebDriver driver, By by, String attribute) {
+        return driver.findElement(by).getAttribute(attribute);
+    }
+
     public String getElementTextByIndex(List<WebElement> elements, int index) {
         return elements.get(index).getText();
     }
@@ -76,6 +85,12 @@ public class BasePage {
 
     public void clickToElement(WebElement element) {
         element.click();
+    }
+
+    public void hoverAndClickToElement(WebDriver driver, By by) {
+        Actions builder = new Actions(driver);
+        builder.moveToElement(getElement(driver, by)).perform();
+        builder.moveToElement(getElement(driver, by)).click().perform();
     }
 
     public void waitAndClickToElement(WebDriver driver, By by) {

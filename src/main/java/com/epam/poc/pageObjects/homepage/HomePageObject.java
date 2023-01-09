@@ -1,7 +1,9 @@
 package com.epam.poc.pageObjects.homepage;
 
 import com.epam.poc.commons.BasePage;
+import com.epam.poc.pageUIs.CommonPageUI;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -14,7 +16,7 @@ public class HomePageObject extends BasePage {
     }
 
     @Step("Close the first home page popup when opening 'shopee.vn'")
-    public void closeHomePagePopup() {
+    public HomePageObject closeHomePagePopup() {
         try {
             waitForPageLoadedCompletely(driver);
             staticWait(3);
@@ -27,6 +29,13 @@ public class HomePageObject extends BasePage {
         catch (Exception e){
             logger.info("Element not found");
         }
+        return this;
+    }
+
+    @Step("Click Shopee Logo to back to homepage")
+    public HomePageObject clickShopeeLogo() {
+        clickToElement(driver, By.cssSelector(CommonPageUI.SHOPEE_LOGO_CSS));
+        return this;
     }
 
 }

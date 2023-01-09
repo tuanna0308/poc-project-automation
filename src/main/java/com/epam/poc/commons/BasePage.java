@@ -105,6 +105,11 @@ public class BasePage {
         ((JavascriptExecutor) driver).executeScript(script, getElement(driver,by));
     }
 
+    public void scrollToBottom(WebDriver driver) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+    }
+
     public void scrollThenClickToElement(WebDriver driver, By by) {
         scrollToElementByJS(driver,by);
         waitForElementUntilClickable(driver,getElement(driver,by));

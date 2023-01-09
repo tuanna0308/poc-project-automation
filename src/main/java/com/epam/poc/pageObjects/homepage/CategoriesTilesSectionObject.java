@@ -27,7 +27,7 @@ public class CategoriesTilesSectionObject extends BasePage {
         return lstElement.get(randomUtil.getRandomNumberInBorder(lstElement.size()));
     }
 
-    @Step("Click on Forward button if element '{0}' is not displayed")
+    @Step("Click on Forward button if the category is not displayed")
     public void clickForwardButtonIfElementNotDisplay(WebElement element) {
         if (!element.isDisplayed()) {
             clickToElementByJS(driver, By.xpath(HOME_CATEGORY_LIST_FORWARD_ARROWS_XPATH));
@@ -35,7 +35,7 @@ public class CategoriesTilesSectionObject extends BasePage {
         waitForElementUntilVisible(driver, element);
     }
 
-    @Step("Get category text by element '{0}'")
+    @Step("Get category text")
     public String getCategoryTextHomePage(WebElement element) {
         clickForwardButtonIfElementNotDisplay(element);
         return getElementText(element);

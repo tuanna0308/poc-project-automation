@@ -3,59 +3,58 @@ package com.epam.poc.homePage;
 import com.epam.poc.commons.BaseTest;
 import com.epam.poc.pageObjects.homepage.HomePageObject;
 import com.epam.poc.pageObjects.homepage.PromoCarouselObject;
-import com.epam.poc.pageUIs.CommonPageUI;
-import com.epam.poc.pageUIs.homepage.PromoCarouselUI;
 import com.epam.poc.utilities.listeners.TestListener;
+import io.qameta.allure.*;
 import org.testng.annotations.*;
-import ru.yandex.qatools.allure.annotations.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.List;
-
 @Listeners({TestListener.class})
-@Title("Regression test")
-@Features("HomePage")
+@Epic("Regression test")
+@Feature("HomePage")
 public class PromoCarouselTest extends BaseTest {
     private PromoCarouselObject promoCarousel;
 
-    @Parameters({"pageUrl"})
     @BeforeMethod
-    public void beforeMethod(String pageUrl) {
+    public void beforeMethod() {
         promoCarousel = new PromoCarouselObject(driver);
         homePage = new HomePageObject(driver);
         homePage.closeHomePagePopup();
-
     }
 
-    @Test
+    @Test()
+    @Severity(SeverityLevel.CRITICAL)
     @Description("Test description: Verify promo details page")
-    @Stories("Promo Carousel (dots)")
+    @Story("Promo Carousel (dots)")
     public void verifyPromoDetailsPage() {
         int carouselIndex = 3;
-        String expectedLink = promoCarousel.getElementAttribute(promoCarousel.getCarouselBannerByIndex(carouselIndex), "href");
+        String expectedLink = promoCarousel.getCarouselBannerHrefByIndex(carouselIndex);
         promoCarousel.clickToCarouselBannerByIndex(carouselIndex);
         Assert.assertEquals(promoCarousel.getCurrentUrl(driver), expectedLink);
     }
 
-    @Test
+    @Test()
+    @Severity(SeverityLevel.CRITICAL)
     @Description("Test description: Verify the navigation among promos")
-    @Stories("Promo Carousel (dots)")
-    public void verifyTheNavigationAmongPromos() {
+    @Story("Promo Carousel (dots)")
+    @Parameters("browserName")
+    public void verifyTheNavigationAmongPromos(String browserName) {
         // Click Shoppe logo to back to homepage
-        homePage.clickShopeeLogo();
-        homePage.closeHomePagePopup();
+        homePage.clickShopeeLogo().closeHomePagePopup();
 
         int carouselIndex = 3;
-        String expectedLink = promoCarousel.getElementAttribute(promoCarousel.getCarouselBannerByIndex(carouselIndex), "href");
+        String expectedLink = promoCarousel.getCarouselBannerHrefByIndex(carouselIndex);
 
-        //Click on forward arrows to navigate to the next promo
-        promoCarousel.clickToForwardArrowsByDotIndex(1);
-        Assert.assertEquals(promoCarousel.getActiveCarouselHref(), expectedLink);
+        // Click on forward arrows to navigate to the next promo
+        promoCarousel.clickToForwardArrowsByDotIndex(2)
+                .clickToElement(promoCarousel.getCarouselBannerByIndex(carouselIndex));
+        Assert.assertEquals(promoCarousel.getCurrentUrl(driver), expectedLink);
 
-        //Click on backward arrows to navigate to the previous promo
-        promoCarousel.clickToBackwardArrowsByDotIndex(3);
-        Assert.assertEquals(promoCarousel.getActiveCarouselHref(), expectedLink);
+        // Click Shoppe logo to back to homepage
+        homePage.clickShopeeLogo().closeHomePagePopup();
+
+        // Click on backward arrows to navigate to the previous promo
+        promoCarousel.clickToBackwardArrowsByDotIndex(browserName, 3)
+                .clickToElement(promoCarousel.getCarouselBannerByIndex(carouselIndex));
+        Assert.assertEquals(promoCarousel.getCurrentUrl(driver), expectedLink);
     }
 }

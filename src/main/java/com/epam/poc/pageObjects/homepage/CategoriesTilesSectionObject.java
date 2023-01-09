@@ -2,6 +2,7 @@ package com.epam.poc.pageObjects.homepage;
 
 import com.epam.poc.commons.BasePage;
 import com.epam.poc.utilities.RandomUtil;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,11 +21,13 @@ public class CategoriesTilesSectionObject extends BasePage {
         this.driver = driver;
     }
 
+    @Step("Get random category")
     public WebElement getRandomCategory() {
         List<WebElement> lstElement = getElements(driver, By.xpath(LIST_CATEGORY_HOMEPAGE_XPATH));
         return lstElement.get(randomUtil.getRandomNumberInBorder(lstElement.size()));
     }
 
+    @Step("Click on Forward button if the category is not displayed")
     public void clickForwardButtonIfElementNotDisplay(WebElement element) {
         if (!element.isDisplayed()) {
             clickToElementByJS(driver, By.xpath(HOME_CATEGORY_LIST_FORWARD_ARROWS_XPATH));
@@ -32,6 +35,7 @@ public class CategoriesTilesSectionObject extends BasePage {
         waitForElementUntilVisible(driver, element);
     }
 
+    @Step("Get category text")
     public String getCategoryTextHomePage(WebElement element) {
         clickForwardButtonIfElementNotDisplay(element);
         return getElementText(element);

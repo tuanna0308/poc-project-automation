@@ -11,7 +11,6 @@ import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 @Listeners({TestListener.class})
@@ -31,15 +30,13 @@ public class CategoriesListSectionTest extends BaseTest {
     @Test
     @Description("Test description: Verify random category in List Categories in Home Page")
     @Story("Categories list section")
-    @Parameters({"pageUrl"})
     public void verifyCategoriesLink() {
         //Click random category and get name
         String expectedCategory = categoriesListSection.clickRandomCategoryAndGetName("main-category")
                 .toLowerCase();
 
         //Wait for search field contains expected text then get placeholder
-        String searchFieldPlaceholder = categoriesListSection
-                .waitForSearchFieldContainsTextThenGetPlaceholder(expectedCategory);
+        String searchFieldPlaceholder = categoriesListSection.getSearchFieldPlaceholder(expectedCategory);
 
         //Verify placeholder, search bar selector and category in list categories
         Assert.assertTrue(searchFieldPlaceholder.toLowerCase().contains(expectedCategory));
@@ -51,7 +48,6 @@ public class CategoriesListSectionTest extends BaseTest {
     @Test
     @Description("Test description: Verify random sub category in List Categories in Home Page")
     @Story("Categories list section")
-    @Parameters({"pageUrl"})
     public void verifySubCategoriesLink() {
         //Back to homepage and close popup
         homePage.clickShopeeLogo().closeHomePagePopup();
@@ -62,8 +58,7 @@ public class CategoriesListSectionTest extends BaseTest {
                 .toLowerCase();
 
         //Wait for search field contains expected text then get placeholder
-        String searchFieldPlaceholder = categoriesListSection
-                .waitForSearchFieldContainsTextThenGetPlaceholder(expectedCategory);
+        String searchFieldPlaceholder = categoriesListSection.getSearchFieldPlaceholder(expectedCategory);
 
         //Verify placeholder, search bar selector and category in list categories
         Assert.assertTrue(searchFieldPlaceholder.toLowerCase().contains(expectedCategory));

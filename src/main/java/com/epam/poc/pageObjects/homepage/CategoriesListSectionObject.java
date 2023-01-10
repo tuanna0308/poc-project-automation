@@ -41,8 +41,8 @@ public class CategoriesListSectionObject extends BasePage {
         return categoryText;
     }
 
-    @Step("Wait for search filed contains text then get placeholder")
-    public String waitForSearchFieldContainsTextThenGetPlaceholder(String text) {
+    @Step("Wait for search field contains text then get placeholder")
+    public String getSearchFieldPlaceholder(String text) {
         WebElement searchField = getElement(driver, By.xpath(INPUT_SEARCH_FIELD_XPATH));
         waitForElementContainsText(driver, searchField, text);
         return getElementAttribute(searchField, "placeholder");

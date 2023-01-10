@@ -24,7 +24,6 @@ public class PromoCarouselTest extends BaseTest {
     @Test()
     @Description("Test description: Verify promo details page")
     @Story("Promo Carousel (dots)")
-    @Parameters({"browserName"})
     public void verifyPromoDetailsPage() {
         int carouselIndex = 3;
         String expectedLink = promoCarousel.getCarouselBannerHrefPathByIndex(carouselIndex);
@@ -51,6 +50,7 @@ public class PromoCarouselTest extends BaseTest {
 
         // Click Shoppe logo to back to homepage
         homePage.clickShopeeLogo().closeHomePagePopup();
+
 
         // Click on backward arrows to navigate to the previous promo
         promoCarousel.clickToBackwardArrowsByDotIndex(browserName, 3)

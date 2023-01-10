@@ -55,15 +55,7 @@ public class PromoCarouselObject extends BasePage {
 
     @Step("Get carousel banner href by index '{0}'")
     public String getCarouselBannerHrefPathByIndex(int index) {
-        String href = getElementAttribute(getCarouselBannerByIndex(index), "href");
-
-        try {
-            return new URL(href).getPath();
-        }
-        catch (MalformedURLException e) {
-            logger.info("A malformed URL has occurred.");
-            return href;
-        }
+        return getUrlPath(getElementAttribute(getCarouselBannerByIndex(index), "href"));
     }
 
 }

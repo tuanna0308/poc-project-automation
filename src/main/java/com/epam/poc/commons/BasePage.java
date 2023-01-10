@@ -11,6 +11,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -206,6 +208,16 @@ public class BasePage {
         }
         catch (Exception e) {
             logger.info("Page title is not the same as expected text");
+        }
+    }
+
+    public String getUrlPath(String url) {
+        try {
+            return new URL(url).getPath();
+        }
+        catch (MalformedURLException e) {
+            logger.info("A malformed URL has occurred.");
+            return null;
         }
     }
 }

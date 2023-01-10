@@ -8,6 +8,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+
 public class PromoCarouselObject extends BasePage {
     private final WebDriver driver;
 
@@ -50,8 +54,16 @@ public class PromoCarouselObject extends BasePage {
     }
 
     @Step("Get carousel banner href by index '{0}'")
-    public String getCarouselBannerHrefByIndex(int index) {
-        return getElementAttribute(getCarouselBannerByIndex(index), "href");
+    public String getCarouselBannerHrefPathByIndex(int index) {
+        String href = getElementAttribute(getCarouselBannerByIndex(index), "href");
+
+        try {
+            return new URL(href).getPath();
+        }
+        catch (MalformedURLException e) {
+            logger.info("A malformed URL has occurred.");
+            return href;
+        }
     }
 
 }

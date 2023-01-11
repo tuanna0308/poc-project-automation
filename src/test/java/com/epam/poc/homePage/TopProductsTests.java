@@ -28,7 +28,7 @@ public class TopProductsTests extends BaseTest {
     }
 
     @Test()
-    @Description("Verify Top Products section in Homepage")
+    @Description("#238 - Verify Top Products section in Homepage")
     @Story("Top Products section")
     public void verifyTopProductsSection() {
         Assert.assertTrue(topProductsPO.validateTopProductsSection());

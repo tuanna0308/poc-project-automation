@@ -50,8 +50,8 @@ public class PromoCarouselObject extends BasePage {
     }
 
     @Step("Get carousel banner href by index '{0}'")
-    public String getCarouselBannerHrefByIndex(int index) {
-        return getElementAttribute(getCarouselBannerByIndex(index), "href");
+    public String getCarouselBannerHrefPathByIndex(int index) {
+        return getUrlPath(getElementAttribute(getCarouselBannerByIndex(index), "href"));
     }
 
 }

@@ -11,6 +11,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -213,13 +215,23 @@ public class BasePage {
             logger.info("Page title is not the same as expected text");
         }
     }
-    public void waitForElementContainsText(WebDriver driver, WebElement element, String text){
+
+    public void waitForElementContainsText(WebDriver driver, WebElement element, String text) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.SHORT_TIMEOUT_KEY)));
-            wait.until(ExpectedConditions.textToBePresentInElement(element,text));
-        }
-        catch (Exception e) {
+            wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+        } catch (Exception e) {
             logger.info("Element doesn't contain expected text");
+        }
+    }
+
+    public String getUrlPath(String url) {
+        try {
+            return new URL(url).getPath();
+        }
+        catch (MalformedURLException e) {
+            logger.info("A malformed URL has occurred.");
+            return null;
         }
     }
 }

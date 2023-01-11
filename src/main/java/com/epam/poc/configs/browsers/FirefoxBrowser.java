@@ -16,8 +16,8 @@ public class FirefoxBrowser {
         if (Boolean.parseBoolean(System.getProperty("isHeadless", "false"))) {
             options.addArguments("--headless");
             options.addArguments("--disable-gpu");
-            options.addArguments("window-size=1920x1080");
         }
+        options.addArguments("window-size=1920x1080");
 
         return new FirefoxDriver(options);
     }

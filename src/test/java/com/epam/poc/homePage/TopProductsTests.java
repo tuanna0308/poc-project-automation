@@ -35,13 +35,22 @@ public class TopProductsTests extends BaseTest {
     }
 
     @Test()
-    @Description("Verify Top Products section in Homepage")
+    @Description("#238 - Verify Top Products section in Homepage")
     @Story("Top Products section")
     public void verifyTopProductsSection() {
         Assert.assertTrue(topProductsPO.validateTopProductsSection());
     }
 
-    @Test(priority = 1)
+    @Test()
+    @Description("Verify See All in Top Products section in Homepage")
+    @Story("Top Products section")
+    public void verifyTopProductsSeeAllSection() {
+        topProductsPO.clickSeeMoreButtonTopProducts();
+        Assert.assertTrue(topProductsPO.validateTopProductPageTitleDisplay());
+        Assert.assertTrue(topProductsPO.validateFirstTopProductTabActive());
+    }
+
+    @Test()
     @Description("Verify backward navigation")
     @Story("Top Products section")
     public void verifyBackwardNavigation() {
@@ -59,7 +68,7 @@ public class TopProductsTests extends BaseTest {
         }
     }
 
-    @Test(priority = 2)
+    @Test()
     @Description("Verify forward navigation")
     @Story("Top Products section")
     public void verifyForwardNavigation() {

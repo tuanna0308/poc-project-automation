@@ -1,6 +1,9 @@
 package com.epam.poc.commons;
 
 import com.epam.poc.configs.drivers.DriverConfig;
+import com.epam.poc.pageObjects.HelpPageObject;
+import com.epam.poc.pageObjects.LoginPageObject;
+import com.epam.poc.pageObjects.SignUpPageObject;
 import com.epam.poc.pageObjects.homepage.HomePageObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +16,9 @@ public class BaseTest {
     protected static WebDriver driver = null;
 
     protected HomePageObject homePage;
+    protected HelpPageObject helpPage;
+    protected SignUpPageObject signUpPage;
+    protected LoginPageObject loginPage;
 
     protected Logger logger;
 

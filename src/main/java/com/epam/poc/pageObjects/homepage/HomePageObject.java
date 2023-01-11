@@ -25,8 +25,7 @@ public class HomePageObject extends BasePage {
             waitForElementUntilClickable(driver, closeButton);
             closeButton.click();
             waitForElementUntilInvisible(driver, closeButton);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             logger.info("Element not found");
         }
         return this;

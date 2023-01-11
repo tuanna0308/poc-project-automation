@@ -14,9 +14,11 @@ import java.util.List;
 public class TopProductsPageObject extends BasePage {
     private final WebDriver driver;
     private static final String HIGHLIGHT_COLOR = "#ee4d2d";
+
     public TopProductsPageObject(WebDriver driver) {
         this.driver = driver;
     }
+
     @Step("Validate Top Products section")
     public boolean validateTopProductsSection() {
         waitForElementUntilVisible(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_TITLE));

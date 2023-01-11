@@ -38,6 +38,7 @@ public class TopProductsTests extends BaseTest {
     @Description("#238 - Verify Top Products section in Homepage")
     @Story("Top Products section")
     public void verifyTopProductsSection() {
+        homePage.clickShopeeLogo().closeHomePagePopup().loadTopProductsSection();
         Assert.assertTrue(topProductsPO.validateTopProductsSection());
     }
 
@@ -45,6 +46,7 @@ public class TopProductsTests extends BaseTest {
     @Description("Verify See All in Top Products section in Homepage")
     @Story("Top Products section")
     public void verifyTopProductsSeeAllSection() {
+        homePage.clickShopeeLogo().closeHomePagePopup().loadTopProductsSection();
         topProductsPO.clickSeeMoreButtonTopProducts();
         Assert.assertTrue(topProductsPO.validateTopProductPageTitleDisplay());
         Assert.assertTrue(topProductsPO.validateFirstTopProductTabActive());
@@ -54,16 +56,19 @@ public class TopProductsTests extends BaseTest {
     @Description("Verify backward navigation")
     @Story("Top Products section")
     public void verifyBackwardNavigation() {
+        homePage.clickShopeeLogo().closeHomePagePopup().loadTopProductsSection();
         List<WebElement> topProducts = topProductsPO.getTopProducts();
         topProductsPO.clickToAllNavigationButtonsByType(NavigationButtonType.FORWARD_ARROW);
         Assert.assertTrue(!topProductsPO.isElementDisplayed(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH)));
         for (int i = topProducts.size() - numberOfTopProductsPerSlide; i < topProducts.size(); i++) {
+            topProductsPO.waitForElementUntilVisible(driver, topProducts.get(i));
             Assert.assertTrue(topProducts.get(i).isDisplayed());
         }
 
         topProductsPO.clickToAllNavigationButtonsByType(NavigationButtonType.BACK_ARROW);
         Assert.assertTrue(!topProductsPO.isElementDisplayed(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_BACK_ARROWS_XPATH)));
         for (int i = 0; i < numberOfTopProductsPerSlide; i++) {
+            topProductsPO.waitForElementUntilVisible(driver, topProducts.get(i));
             Assert.assertTrue(topProducts.get(i).isDisplayed());
         }
     }
@@ -83,9 +88,11 @@ public class TopProductsTests extends BaseTest {
             topProductsPO.clickNavigationButton(By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH));
 
             for (int j = startIndex; j < endIndex; j++) {
+                topProductsPO.waitForElementUntilVisible(driver, topProducts.get(j));
                 Assert.assertTrue(topProducts.get(j).isDisplayed());
             }
         }
+        topProductsPO.waitForElementUntilInvisible(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH));
         Assert.assertTrue(!topProductsPO.isElementDisplayed(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH)));
     }
 }

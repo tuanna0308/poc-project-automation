@@ -9,4 +9,6 @@ public class TopProductsPageUI {
     public static String TOP_PRODUCT_ITEM_IMAGE = "//div //img";
     public static String TOP_PRODUCT_ITEM_SOLD_IN_MONTH = "//div/div[3]";
     public static String TOP_PRODUCT_ITEM_CATEGORY = "//div/following-sibling::div";
+    public static String TOP_PRODUCT_PAGE_TITLE = "//h1[normalize-space(text())='Tìm kiếm hàng đầu']";
+    public static String FIRST_TOP_PRODUCT_TAB = "//li[contains(@class,'stardust-tabs-header__tab')][1]";
 }

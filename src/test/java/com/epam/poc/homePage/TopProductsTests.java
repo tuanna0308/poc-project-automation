@@ -33,4 +33,13 @@ public class TopProductsTests extends BaseTest {
     public void verifyTopProductsSection() {
         Assert.assertTrue(topProductsPO.validateTopProductsSection());
     }
+
+    @Test()
+    @Description("Verify See All in Top Products section in Homepage")
+    @Story("Top Products section")
+    public void verifyTopProductsSeeAllSection() {
+        topProductsPO.clickSeeMoreButtonTopProducts();
+        Assert.assertTrue(topProductsPO.validateTopProductPageTitleDisplay());
+        Assert.assertTrue(topProductsPO.validateFirstTopProductTabActive());
+    }
 }

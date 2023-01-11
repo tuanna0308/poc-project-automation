@@ -8,10 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-
 public class PromoCarouselObject extends BasePage {
     private final WebDriver driver;
 

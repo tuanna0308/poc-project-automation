@@ -107,6 +107,11 @@ public class BasePage {
         ((JavascriptExecutor) driver).executeScript(script, getElement(driver,by));
     }
 
+    public void scrollToBottom(WebDriver driver) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+    }
+
     public void scrollThenClickToElement(WebDriver driver, By by) {
         scrollToElementByJS(driver,by);
         waitForElementUntilClickable(driver,getElement(driver,by));
@@ -208,6 +213,15 @@ public class BasePage {
         }
         catch (Exception e) {
             logger.info("Page title is not the same as expected text");
+        }
+    }
+
+    public void waitForElementContainsText(WebDriver driver, WebElement element, String text) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.SHORT_TIMEOUT_KEY)));
+            wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+        } catch (Exception e) {
+            logger.info("Element doesn't contain expected text");
         }
     }
 

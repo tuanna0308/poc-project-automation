@@ -43,7 +43,7 @@ public class PopularCategoriesMenuTest extends BaseTest {
         String popularCategoryText = popularCategoriesMenu.getElementTextByIndex(popularCategoriesMenu.getPopularCategories(), 0);
 
         // Verify URL
-        String urlExpected = pageUrl + PageURL.SEARCH_URL + "?keyword=" + popularCategoryText.toLowerCase();
+        String urlExpected = pageUrl + PageURL.SEARCH_URL.getUrl() + "?keyword=" + popularCategoryText.toLowerCase();
         String urlActual = URLDecoder.decode(driver.getCurrentUrl());
         Assert.assertEquals(urlExpected, urlActual);
 
@@ -80,7 +80,7 @@ public class PopularCategoriesMenuTest extends BaseTest {
         String popularCategoryText = popularCategoriesMenu.getElementTextByIndex(popularCategoriesMenu.getPopularCategories(), 0);
 
         // Verify URL
-        String urlExpected = pageUrl + PageURL.SEARCH_URL + "?keyword=" + popularCategoryText.toLowerCase();
+        String urlExpected = pageUrl + PageURL.SEARCH_URL.getUrl() + "?keyword=" + popularCategoryText.toLowerCase();
         String urlActual = URLDecoder.decode(driver.getCurrentUrl());
         Assert.assertEquals(urlExpected, urlActual);
 

@@ -29,7 +29,6 @@ public class HomePageTest extends BaseTest {
     public void beforeMethod() {
         homePage = new HomePageObject(driver);
         headerPage = new HeaderPageObject(driver);
-
         homePage.closeHomePagePopup();
     }
 

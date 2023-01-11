@@ -1,10 +1,9 @@
 package com.epam.poc.homePage;
 
 import com.epam.poc.commons.BaseTest;
-import com.epam.poc.pageObjects.homepage.HomePageObject;
 import com.epam.poc.pageObjects.HeaderPageObject;
+import com.epam.poc.pageObjects.homepage.HomePageObject;
 import com.epam.poc.pageUIs.CommonPageUI;
-import com.epam.poc.pageUIs.HeaderPageUI;
 import com.epam.poc.utilities.listeners.TestListener;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -16,6 +15,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static com.epam.poc.pageUIs.HeaderPageUI.*;
 
 @Listeners({TestListener.class})
 @Epic("Regression test")
@@ -38,7 +39,7 @@ public class HomePageTest extends BaseTest {
     @Parameters({"pageUrl"})
     public void verifyHomeButtonInAnyPage(String pageUrl) {
         // Verify other page which has Home button
-        headerPage.clickToElement(driver, By.cssSelector(HeaderPageUI.JOIN_AS_SELLER_HYPERLINK_CSS));
+        headerPage.clickToElement(driver, JOIN_AS_SELLER_LINK_BY);
         String sellerTitleExpected = "Đăng Ký Bán Hàng Trên Shopee Ngay Hôm Nay - Hỗ Trợ Miễn Phí Cho Người Bán Mới";
         homePage.waitForPageTitleAsExpectedText(driver, sellerTitleExpected);
         Assert.assertEquals(homePage.getPageTitle(driver), sellerTitleExpected);

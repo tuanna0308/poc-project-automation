@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -77,8 +78,12 @@ public class BasePage {
         return elements.stream().limit(numberOfElement).collect(Collectors.toList());
     }
 
+    public void clearByKeys(WebDriver driver, By by) {
+        getElement(driver, by).sendKeys(Keys.CONTROL+"A"+Keys.DELETE);
+    }
+
     public void sendKeyToElement(WebDriver driver, By by, String value) {
-        getElement(driver, by).clear();
+        clearByKeys(driver, by);
         getElement(driver, by).sendKeys(value);
     }
 

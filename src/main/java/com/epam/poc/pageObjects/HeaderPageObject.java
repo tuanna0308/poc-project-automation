@@ -2,9 +2,12 @@ package com.epam.poc.pageObjects;
 
 import com.epam.poc.commons.BasePage;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static com.epam.poc.pageUIs.HeaderPageUI.*;
+import static com.epam.poc.pageUIs.SearchResultUI.FIRST_HISTORICAL_SUGGESTION_OPTION_CSS;
+import static com.epam.poc.pageUIs.SearchResultUI.SEARCHBAR_LISTBOX_ID;
 
 public class HeaderPageObject extends BasePage {
     private final WebDriver driver;
@@ -57,5 +60,31 @@ public class HeaderPageObject extends BasePage {
     public void closeAndSwitchToPreviousTab() {
         closeCurrentTab(driver);
         switchToFirstTab(driver);
+    }
+
+    @Step("Click search text box")
+    public void clickSearchTextBox() {
+        clickToElement(driver, By.cssSelector(SEARCH_TEXTBOX_CSS));
+    }
+
+    @Step("Clear value in search text box")
+    public void clearSearchTextBox() {
+        clearByKeys(driver, By.cssSelector(SEARCH_TEXTBOX_CSS));
+    }
+
+    @Step("Search by keyword '{0}'")
+    public void searchByKeyword(String keyword) {
+        sendKeyToElement(driver, By.cssSelector(SEARCH_TEXTBOX_CSS), keyword);
+        clickToElement(driver, By.cssSelector(SEARCH_BUTTON_CSS));
+    }
+
+    @Step("Get text value in search text box")
+    public String getTextSearchTextBox() {
+        return getElementText(driver, By.cssSelector(FIRST_HISTORICAL_SUGGESTION_OPTION_CSS));
+    }
+
+    @Step("Verify search bar is displayed'")
+    public boolean verifySearchBarIsDisplayed() {
+        return isElementDisplayed(driver, By.id(SEARCHBAR_LISTBOX_ID));
     }
 }

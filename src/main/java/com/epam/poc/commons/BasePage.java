@@ -178,6 +178,16 @@ public class BasePage {
         }
     }
 
+    public void waitForElementUntilInvisible(WebDriver driver, By by){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
+            wait.until(ExpectedConditions.invisibilityOf(getElement(driver, by)));
+        }
+        catch (Exception e) {
+            logger.info("Element is visibility");
+        }
+    }
+
     public void waitForElementUntilVisible(WebDriver driver, By by){
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));

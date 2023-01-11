@@ -9,4 +9,6 @@ public class TopProductsPageUI {
     public static String TOP_PRODUCT_ITEM_IMAGE = "//div //img";
     public static String TOP_PRODUCT_ITEM_SOLD_IN_MONTH = "//div/div[3]";
     public static String TOP_PRODUCT_ITEM_CATEGORY = "//div/following-sibling::div";
+    public static String TOP_PRODUCT_BACK_ARROWS_XPATH = "(//div[contains(@class,'shopee-header-section--simple')]//div[contains(@class,'carousel-arrow') and .//*[contains(@class,'icon-arrow-left-bold')]])[4]";
+    public static String TOP_PRODUCT_FORWARD_ARROWS_XPATH = "(//div[contains(@class,'shopee-header-section--simple')]//div[contains(@class,'carousel-arrow') and .//*[contains(@class,'icon-arrow-right-bold')]])[4]";
 }

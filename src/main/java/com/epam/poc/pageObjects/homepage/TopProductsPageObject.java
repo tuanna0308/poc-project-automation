@@ -2,6 +2,8 @@ package com.epam.poc.pageObjects.homepage;
 
 import com.epam.poc.commons.BasePage;
 import com.epam.poc.pageUIs.homepage.TopProductsPageUI;
+import com.epam.poc.utilities.constants.NavigationButtonType;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,4 +51,39 @@ public class TopProductsPageObject extends BasePage {
         return true;
     }
 
+    public List<WebElement> getTopProducts() {
+        return getElements(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_LIST));
+    }
+
+    @Step("Click to navigation button")
+    public TopProductsPageObject clickNavigationButton(By by) {
+        waitForElementUntilClickable(driver, by);
+        hoverAndClickToElement(driver, by);
+        staticWait(1);
+        return this;
+    }
+
+
+    @Step("Click to all navigation buttons by type '{0}'")
+    public TopProductsPageObject clickToAllNavigationButtonsByType(NavigationButtonType type) {
+        int numberOfButtons = getTopProducts().size() / 5 - 1;
+
+        for(int i = 0; i < numberOfButtons; i++) {
+            if(type == NavigationButtonType.FORWARD_ARROW) {
+                clickNavigationButton(By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH));
+            }
+            else {
+                clickNavigationButton(By.xpath(TopProductsPageUI.TOP_PRODUCT_BACK_ARROWS_XPATH));
+            }
+        }
+
+        if(type == NavigationButtonType.FORWARD_ARROW) {
+            waitForElementUntilInvisible(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH));
+        }
+        else {
+            waitForElementUntilInvisible(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_BACK_ARROWS_XPATH));
+        }
+
+        return this;
+    }
 }

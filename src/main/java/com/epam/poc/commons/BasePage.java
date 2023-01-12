@@ -1,6 +1,7 @@
 package com.epam.poc.commons;
 
 import com.epam.poc.utilities.PropertyReader;
+import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import static com.epam.poc.utilities.constants.PageURL.HOME_PAGE_URL;
 
 public class BasePage {
     protected Logger logger;
@@ -267,5 +270,20 @@ public class BasePage {
 
     public void closeCurrentTab(WebDriver driver) {
         driver.close();
+    }    
+
+    public String getNewTabUrl(WebDriver driver) {
+        Set<String> handles = driver.getWindowHandles();
+        for (String actual : handles) {
+            if(!actual.equalsIgnoreCase(this.getCurrentUrl(driver))){
+                driver.switchTo().window(actual);
+                waitForPageLoadedCompletely(driver);
+            }
+        }
+        return driver.getCurrentUrl();
+    }
+
+    public static void goToHomePage(WebDriver driver){
+        driver.navigate().to(HOME_PAGE_URL.getUrl());
     }
 }

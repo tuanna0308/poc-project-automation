@@ -2,8 +2,19 @@ package com.epam.poc.pageObjects;
 
 import com.epam.poc.commons.BasePage;
 import io.qameta.allure.Step;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import static com.epam.poc.pageUIs.HeaderPageUI.LANGUAGE_SELECTOR_DROPDOWN_LIST_BY;
+import static com.epam.poc.pageUIs.HeaderPageUI.LOGIN_BUTTON_BY;
+import static com.epam.poc.pageUIs.HeaderPageUI.NOTIFICATION_SPAN_XPATH;
+import static com.epam.poc.pageUIs.HeaderPageUI.NOTIFICATION_POP_OVER_TEXT_BY;
+import static com.epam.poc.pageUIs.HeaderPageUI.SHOPPING_CART_ICON_BY;
+import static com.epam.poc.pageUIs.HeaderPageUI.SHOPPING_CART_ICON_POP_OVER_BY;
+import static com.epam.poc.pageUIs.HeaderPageUI.SIGN_UP_BUTTON_BY;
 
 import static com.epam.poc.pageUIs.HeaderPageUI.*;
 import static com.epam.poc.pageUIs.SearchResultUI.FIRST_HISTORICAL_SUGGESTION_OPTION_CSS;
@@ -87,4 +98,59 @@ public class HeaderPageObject extends BasePage {
     public boolean verifySearchBarIsDisplayed() {
         return isElementDisplayed(driver, By.id(SEARCHBAR_LISTBOX_ID));
     }
+
+    @Step("Get notification element")
+    public WebElement getNotificationElement() {
+        waitForElementUntilVisible(driver, NOTIFICATION_SPAN_XPATH);
+        return getElement(driver, NOTIFICATION_SPAN_XPATH);
+    }
+
+    @Step("Get notification pop over text element")
+    public WebElement getNotificationPopOverTextElement() {
+        return getElement(driver, NOTIFICATION_POP_OVER_TEXT_BY);
+    }
+
+    @Step("Get language selector element")
+    public WebElement getLanguageSelectorElement() {
+        return getElement(driver, LANGUAGE_SELECTOR_BY);
+    }
+
+    @Step("Get language selector dropdown list")
+    public List<WebElement> getLanguageSelectorDropdownList() {
+        return getElements(driver, LANGUAGE_SELECTOR_DROPDOWN_LIST_BY);
+    }
+
+    @Step("Get actual language selector dropdown list")
+    public List<String> getActualLanguageSelectorDropdownList() {
+        return getLanguageSelectorDropdownList().stream()
+                .map(e -> e.getAttribute("innerHTML"))
+                .collect(Collectors.toList());
+    }
+
+    @Step("Get sign up button element")
+    public WebElement getSignUpButtonElement() {
+        return getElement(driver, SIGN_UP_BUTTON_BY);
+    }
+
+    @Step("Get login button element")
+    public WebElement getLoginButtonElement() {
+        return getElement(driver, LOGIN_BUTTON_BY);
+    }
+
+    @Step("Get shopping cart icon element")
+    public WebElement getShoppingCartIconElement() {
+        return getElement(driver, SHOPPING_CART_ICON_BY);
+    }
+
+    @Step("Get shopping cart pop over element")
+    public WebElement getShoppingCartPopOverElement() {
+        return getElement(driver, SHOPPING_CART_ICON_POP_OVER_BY);
+    }
+
+    @Step("Get shopping cart pop over element")
+    public void waitAndHoverLanguage(By languageBy) {
+        waitForElementUntilVisible(driver, languageBy);
+        hoverElement(driver, languageBy);
+    }
+
 }

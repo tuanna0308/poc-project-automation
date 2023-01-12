@@ -2,6 +2,7 @@ package com.epam.poc.pageObjects.homepage;
 
 import com.epam.poc.commons.BasePage;
 import com.epam.poc.pageUIs.CommonPageUI;
+import com.epam.poc.pageUIs.homepage.TopProductsPageUI;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -40,7 +41,10 @@ public class HomePageObject extends BasePage {
 
     @Step("Scroll down to Top Products section")
     public HomePageObject loadTopProductsSection() {
-        scrollDownByOffset(driver, 1500);
+        while (!isElementDisplayed(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_TITLE))) {
+            scrollDownByOffset(driver, 200);
+            waitForElementUntilVisible(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_TITLE));
+        }
         return this;
     }
 }

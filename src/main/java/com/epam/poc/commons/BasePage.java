@@ -138,7 +138,12 @@ public class BasePage {
     }
 
     public boolean isElementDisplayed(WebDriver driver, By by) {
-        return getElement(driver, by).isDisplayed();
+        try {
+            return getElement(driver, by).isDisplayed();
+        } catch (NoSuchElementException e) {
+            logger.info("Element is not displayed.");
+            return false;
+        }
     }
 
     public void waitForPageLoadedCompletely(WebDriver driver) {

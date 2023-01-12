@@ -122,6 +122,11 @@ public class BasePage {
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
 
+    public void scrollDownByOffset(WebDriver driver, int offset) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0," + offset + ")");
+    }
+
     public void scrollThenClickToElement(WebDriver driver, By by) {
         scrollToElementByJS(driver, by);
         waitForElementUntilClickable(driver, getElement(driver, by));
@@ -176,6 +181,16 @@ public class BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.invisibilityOf(element));
         } catch (Exception e) {
+            logger.info("Element is visibility");
+        }
+    }
+
+    public void waitForElementUntilInvisible(WebDriver driver, By by){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
+            wait.until(ExpectedConditions.invisibilityOf(getElement(driver, by)));
+        }
+        catch (Exception e) {
             logger.info("Element is visibility");
         }
     }
@@ -239,7 +254,7 @@ public class BasePage {
             return null;
         }
     }
-    
+
     public void switchToLastTab(WebDriver driver) {
         ArrayList<String> tabs = new ArrayList(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(tabs.size() - 1));

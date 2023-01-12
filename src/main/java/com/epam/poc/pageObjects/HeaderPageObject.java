@@ -2,7 +2,6 @@ package com.epam.poc.pageObjects;
 
 import com.epam.poc.commons.BasePage;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.openqa.selenium.By;

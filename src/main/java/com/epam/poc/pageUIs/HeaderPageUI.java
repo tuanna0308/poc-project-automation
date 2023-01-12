@@ -11,8 +11,6 @@ public class HeaderPageUI {
     public static final By DOWNLOAD_LINK_BY = By.id("temporaryId");
     public static final By DOWNLOAD_QR_IMG_BY = By.cssSelector("[aria-describedby='temporaryId']");
     public static final String JOIN_AS_SELLER_HYPERLINK_CSS = "a[href='https://shopee.vn/m/sell-on-shopee']";
-    public static final String SEARCH_TEXTBOX_CSS = "input.shopee-searchbar-input__input";
-    public static final String SEARCH_BUTTON_CSS = "button.shopee-searchbar__search-button";
     public static final By HELP_BUTTON_BY = By.cssSelector(".navbar__link--help");
     public static final By SIGN_UP_BUTTON_BY = By.cssSelector(".navbar__link--signup");
     public static final By LOGIN_BUTTON_BY = By.cssSelector(".navbar__link--login");
@@ -27,4 +25,7 @@ public class HeaderPageUI {
     public static final By ENGLISH_BUTTON_BY = By.cssSelector(".FD9KOo ._40RGqV:last-of-type");
     public static final By NOTIFICATION_SPAN_XPATH = By.xpath("//span[text()='Thông báo']");
     public static final By NOTIFICATION_POP_OVER_TEXT_BY = By.cssSelector(".KTqD8t");
+    public static final String SEARCH_TEXTBOX_CSS = "input.shopee-searchbar-input__input";
+    public static final String SEARCH_BUTTON_CSS = "button.shopee-searchbar__search-button";
+
 }

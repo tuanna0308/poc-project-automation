@@ -5,14 +5,13 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static com.epam.poc.pageUIs.HeaderPageUI.ENGLISH_BUTTON_BY;
-import static com.epam.poc.pageUIs.HeaderPageUI.LANGUAGE_SELECTOR_BY;
 import static com.epam.poc.pageUIs.HeaderPageUI.LANGUAGE_SELECTOR_DROPDOWN_LIST_BY;
 import static com.epam.poc.pageUIs.HeaderPageUI.LOGIN_BUTTON_BY;
-import static com.epam.poc.pageUIs.HeaderPageUI.NOTIFICATION_BUTTON_BY;
+import static com.epam.poc.pageUIs.HeaderPageUI.NOTIFICATION_SPAN_XPATH;
 import static com.epam.poc.pageUIs.HeaderPageUI.NOTIFICATION_POP_OVER_TEXT_BY;
 import static com.epam.poc.pageUIs.HeaderPageUI.SHOPPING_CART_ICON_BY;
 import static com.epam.poc.pageUIs.HeaderPageUI.SHOPPING_CART_ICON_POP_OVER_BY;
@@ -103,61 +102,56 @@ public class HeaderPageObject extends BasePage {
 
     @Step("Get notification element")
     public WebElement getNotificationElement() {
-        WebElement notificationElement = driver.findElement(NOTIFICATION_BUTTON_BY);
-        return notificationElement;
+        waitForElementUntilVisible(driver, NOTIFICATION_SPAN_XPATH);
+        return getElement(driver, NOTIFICATION_SPAN_XPATH);
     }
 
     @Step("Get notification pop over text element")
     public WebElement getNotificationPopOverTextElement() {
-        WebElement notificationPopOverText = driver.findElement(NOTIFICATION_POP_OVER_TEXT_BY);
-        return notificationPopOverText;
+        return getElement(driver, NOTIFICATION_POP_OVER_TEXT_BY);
     }
 
     @Step("Get language selector element")
     public WebElement getLanguageSelectorElement() {
-        WebElement languageSelectorDropdownElement = driver.findElement(LANGUAGE_SELECTOR_BY);
-        return languageSelectorDropdownElement;
+        return getElement(driver, LANGUAGE_SELECTOR_BY);
     }
 
     @Step("Get language selector dropdown list")
     public List<WebElement> getLanguageSelectorDropdownList() {
-        List<WebElement> dropdownList = driver.findElements(LANGUAGE_SELECTOR_DROPDOWN_LIST_BY);
-        return dropdownList;
+        return getElements(driver, LANGUAGE_SELECTOR_DROPDOWN_LIST_BY);
     }
 
     @Step("Get actual language selector dropdown list")
     public List<String> getActualLanguageSelectorDropdownList() {
-        List<String> actualList = getLanguageSelectorDropdownList().stream()
+        return getLanguageSelectorDropdownList().stream()
                 .map(e -> e.getAttribute("innerHTML"))
                 .collect(Collectors.toList());
-        return actualList;
     }
 
     @Step("Get sign up button element")
     public WebElement getSignUpButtonElement() {
-        WebElement signUpButtonElement = driver.findElement(SIGN_UP_BUTTON_BY);
-        return signUpButtonElement;
+        return getElement(driver, SIGN_UP_BUTTON_BY);
     }
 
     @Step("Get login button element")
     public WebElement getLoginButtonElement() {
-        WebElement loginButtonElement = driver.findElement(LOGIN_BUTTON_BY);
-        return loginButtonElement;
+        return getElement(driver, LOGIN_BUTTON_BY);
     }
 
     @Step("Get shopping cart icon element")
     public WebElement getShoppingCartIconElement() {
-        return driver.findElement(SHOPPING_CART_ICON_BY);
+        return getElement(driver, SHOPPING_CART_ICON_BY);
     }
 
     @Step("Get shopping cart pop over element")
     public WebElement getShoppingCartPopOverElement() {
-        WebElement shoppingCartPopOver = driver.findElement(SHOPPING_CART_ICON_POP_OVER_BY);
-        return shoppingCartPopOver;
+        return getElement(driver, SHOPPING_CART_ICON_POP_OVER_BY);
     }
 
-    @Step("Get English button element")
-    public WebElement getEnglishButtonElement() {
-        return driver.findElement(ENGLISH_BUTTON_BY);
+    @Step("Get shopping cart pop over element")
+    public void waitAndHoverLanguage(By languageBy) {
+        waitForElementUntilVisible(driver, languageBy);
+        hoverElement(driver, languageBy);
     }
+
 }

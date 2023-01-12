@@ -12,20 +12,22 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import org.testng.annotations.AfterMethod;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.epam.poc.commons.BasePage.goToHomePage;
+import static com.epam.poc.pageUIs.HeaderPageUI.ENGLISH_BUTTON_BY;
+import static com.epam.poc.pageUIs.HeaderPageUI.ENGLISH_LANGUAGE_SELECTOR_BY;
 import static com.epam.poc.pageUIs.HeaderPageUI.HELP_BUTTON_BY;
-import static com.epam.poc.pageUIs.HeaderPageUI.LANGUAGE_SELECTOR_BY;
 import static com.epam.poc.pageUIs.HeaderPageUI.LOGIN_BUTTON_BY;
-import static com.epam.poc.pageUIs.HeaderPageUI.NOTIFICATION_BUTTON_BY;
+import static com.epam.poc.pageUIs.HeaderPageUI.NOTIFICATION_SPAN_XPATH;
 import static com.epam.poc.pageUIs.HeaderPageUI.SHOPPING_CART_ICON_BY;
 import static com.epam.poc.pageUIs.HeaderPageUI.SIGN_UP_BUTTON_BY;
 import static com.epam.poc.pageUIs.HeaderPageUI.VIETNAMESE_BUTTON_BY;
+import static com.epam.poc.pageUIs.HeaderPageUI.VIETNAMESE_LANGUAGE_SELECTOR_BY;
+import static com.epam.poc.pageUIs.SignUpPageUI.ICON_SHOPEE_LOGO;
 import static com.epam.poc.utilities.constants.PopOverContents.NOTIFICATION_POP_OVER_CONTENT;
 import static com.epam.poc.utilities.constants.PopOverContents.SHOPPING_CART_POP_OVER_CONTENT;
 import static com.epam.poc.utilities.constants.PageURL.HELP_PAGE_URL;
@@ -46,19 +48,13 @@ public class TopRightNavigationMenuTest extends BaseTest {
         homePage.closeHomePagePopup();
     }
 
-    @AfterMethod
-    public void afterMethod() {
-        goToHomePage(driver);
-        homePage.closeHomePagePopup();
-    }
-
     @Test
     @Description("TC-48: Verify notification hover action")
     @Story("Top right navigation menu")
     public void verifyNotificationHoverAction() {
         Assert.assertTrue(headerPage.getNotificationElement().isDisplayed());
 
-        homePage.hoverElement(driver, NOTIFICATION_BUTTON_BY);
+        homePage.hoverElement(driver, NOTIFICATION_SPAN_XPATH);
         Assert.assertTrue(headerPage.getNotificationElement().isDisplayed());
         Assert.assertTrue(headerPage.getNotificationPopOverTextElement().isDisplayed());
         Assert.assertEquals(headerPage.getNotificationPopOverTextElement().getText(),
@@ -74,18 +70,19 @@ public class TopRightNavigationMenuTest extends BaseTest {
         helpPage.waitForPageLoadedCompletely(driver);
         String currentUrl = helpPage.getNewTabUrl(driver);
         Assert.assertEquals(currentUrl, HELP_PAGE_URL.getUrl());
+        headerPage.closeAndSwitchToPreviousTab();
     }
 
     @Test
     @Description("TC-57: Verify Language selector dropdown list on top right navigation menu")
     @Story("Top right navigation menu")
     public void verifyLanguageSelectorDropdownList() {
-        homePage.hoverElement(driver, LANGUAGE_SELECTOR_BY);
+        headerPage.waitAndHoverLanguage(VIETNAMESE_LANGUAGE_SELECTOR_BY);
         headerPage.getLanguageSelectorDropdownList()
                 .forEach(e -> Assert.assertTrue(e.isDisplayed()));
         Assert.assertEquals(headerPage.getActualLanguageSelectorDropdownList(), Languages.getLanguageList());
 
-        homePage.clickToElement(driver, VIETNAMESE_BUTTON_BY);
+        homePage.waitAndClickToElement(driver, VIETNAMESE_BUTTON_BY);
         Assert.assertTrue(headerPage.getLanguageSelectorElement().isDisplayed());
         Assert.assertEquals(headerPage.getLanguageSelectorElement().getText(), "Tiếng Việt");
         Assert.assertTrue(headerPage.getSignUpButtonElement().isDisplayed());
@@ -94,8 +91,9 @@ public class TopRightNavigationMenuTest extends BaseTest {
         Assert.assertEquals(headerPage.getLoginButtonElement().getText(), "Đăng Nhập");
 
         homePage.closeHomePagePopup();
-        homePage.hoverElement(driver, LANGUAGE_SELECTOR_BY);
-        homePage.clickToElement(headerPage.getEnglishButtonElement());
+
+        headerPage.waitAndHoverLanguage(VIETNAMESE_LANGUAGE_SELECTOR_BY);
+        homePage.waitAndClickToElement(driver, ENGLISH_BUTTON_BY);
         Assert.assertTrue(headerPage.getLanguageSelectorElement().isDisplayed());
         Assert.assertEquals(headerPage.getLanguageSelectorElement().getText(), "English");
         Assert.assertTrue(headerPage.getSignUpButtonElement().isDisplayed());
@@ -103,12 +101,9 @@ public class TopRightNavigationMenuTest extends BaseTest {
         Assert.assertTrue(headerPage.getLoginButtonElement().isDisplayed());
         Assert.assertEquals(headerPage.getLoginButtonElement().getText(), "Login");
 
-        homePage.hoverElement(driver, LANGUAGE_SELECTOR_BY);
-        homePage.clickToElement(driver, VIETNAMESE_BUTTON_BY);
+        headerPage.waitAndHoverLanguage(ENGLISH_LANGUAGE_SELECTOR_BY);
+        homePage.waitAndClickToElement(driver, VIETNAMESE_BUTTON_BY);
     }
-
-
-
 
     @Test
     @Description("TC-58: Verify Sign Up link on top right navigation menu")
@@ -118,6 +113,9 @@ public class TopRightNavigationMenuTest extends BaseTest {
         signUpPage = new SignUpPageObject(driver);
         signUpPage.waitForPageLoadedCompletely(driver);
         String currentUrl = driver.getCurrentUrl();
+
+        headerPage.clickToElement(driver, ICON_SHOPEE_LOGO);
+
         Assert.assertEquals(currentUrl, SIGN_UP_PAGE_URL.getUrl());
     }
 
@@ -129,6 +127,9 @@ public class TopRightNavigationMenuTest extends BaseTest {
         loginPage = new LoginPageObject(driver);
         loginPage.waitForPageLoadedCompletely(driver);
         String currentUrl = driver.getCurrentUrl();
+
+        headerPage.clickToElement(driver, ICON_SHOPEE_LOGO);
+
         Assert.assertEquals(currentUrl, LOGIN_PAGE_URL.getUrl());
     }
 
@@ -144,6 +145,9 @@ public class TopRightNavigationMenuTest extends BaseTest {
         loginPage = new LoginPageObject(driver);
         loginPage.waitForPageLoadedCompletely(driver);
         String currentUrl = driver.getCurrentUrl();
+
+        headerPage.waitAndClickToElement(driver, ICON_SHOPEE_LOGO);
+
         Assert.assertEquals(currentUrl, LOGIN_PAGE_URL.getUrl());
     }
 }

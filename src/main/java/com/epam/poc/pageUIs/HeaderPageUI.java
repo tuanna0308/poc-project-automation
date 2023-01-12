@@ -19,9 +19,12 @@ public class HeaderPageUI {
     public static final By SHOPPING_CART_ICON_BY = By.cssSelector(".icon-shopping-cart-2");
     public static final By SHOPPING_CART_ICON_POP_OVER_BY = By.cssSelector(".cart-drawer__popover");
     public static final By LANGUAGE_SELECTOR_BY = By.cssSelector("#stardust-popover0");
+    public static final By VIETNAMESE_LANGUAGE_SELECTOR_BY = By.xpath("//span[text()='Tiếng Việt']");
+    public static final By ENGLISH_LANGUAGE_SELECTOR_BY = By.xpath("//span[text()='English']");
+
     public static final By LANGUAGE_SELECTOR_DROPDOWN_LIST_BY = By.cssSelector(".FD9KOo ._40RGqV span");
     public static final By VIETNAMESE_BUTTON_BY = By.cssSelector(".FD9KOo ._40RGqV:first-of-type");
     public static final By ENGLISH_BUTTON_BY = By.cssSelector(".FD9KOo ._40RGqV:last-of-type");
-    public static final By NOTIFICATION_BUTTON_BY = By.cssSelector("#stardust-popover1");
+    public static final By NOTIFICATION_SPAN_XPATH = By.xpath("//span[text()='Thông báo']");
     public static final By NOTIFICATION_POP_OVER_TEXT_BY = By.cssSelector(".KTqD8t");
 }

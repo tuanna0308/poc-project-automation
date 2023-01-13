@@ -10,8 +10,9 @@ schedules:
   - cron: "0 17 * * *"
     displayName: Daily midnight (UTC + 7) build
     branches:
-      include: master
-    always: boolean
+      include:
+      - master
+    always: true
 
 pool:
   vmImage: ubuntu-latest

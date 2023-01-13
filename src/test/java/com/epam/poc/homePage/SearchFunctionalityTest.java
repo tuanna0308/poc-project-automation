@@ -42,7 +42,7 @@ public class SearchFunctionalityTest extends BaseTest {
 
         Assert.assertEquals(searchResultPage.getTextSelectedSortButton(), "Liên Quan");
 
-        // ToDo: Implement later on feature "Product Card"
+        Assert.assertTrue(searchResultPage.verifyProductCardTitleContainsKeyword("túi xách"));
 
         searchResultPage.clickPaginationButtonByPageNumber("2");
         Assert.assertEquals(searchResultPage.getTextSearchResultLabel(), searchResultLabelExpected);
@@ -62,7 +62,7 @@ public class SearchFunctionalityTest extends BaseTest {
 
         Assert.assertEquals(searchResultPage.getTextSelectedSortButton(), "Liên Quan");
 
-        // ToDo: Implement later on feature "Product Card"
+        Assert.assertTrue(searchResultPage.verifyProductCardTitleContainsKeyword("thời trang thu đông cho bé"));
 
         searchResultPage.clickPaginationButtonByIconRight();
         Assert.assertEquals(searchResultPage.getTextSearchResultLabel(), searchResultLabelExpected);

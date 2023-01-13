@@ -25,19 +25,4 @@ public class PopularCategoriesMenuObject extends BasePage {
     public List<WebElement> getPopularCategories() {
         return getElements(driver, By.xpath(PopularCategoriesMenuUI.POPULAR_CATEGORIES_MENU_XPATH));
     }
-
-    @Step("Check whether '{1}' contains at least 1 word in '{0}' or not")
-    public boolean isContainsKeyword(String keyword, String text) {
-        boolean isContainsKeyword = false;
-        String [] words = keyword.split(" ");
-
-        for (String word: words ) {
-            if(text.toLowerCase().contains(word.toLowerCase())) {
-                isContainsKeyword = true;
-                break;
-            }
-        }
-
-        return isContainsKeyword;
-    }
 }

@@ -77,35 +77,43 @@ public class TopProductsPageObject extends BasePage {
         return getElements(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_LIST));
     }
 
-    @Step("Click to navigation button")
-    public TopProductsPageObject clickNavigationButton(By by) {
-        waitForElementUntilClickable(driver, by);
-        hoverAndClickToElement(driver, by);
+    @Step("Show next Top Products")
+    public TopProductsPageObject showNextTopProducts() {
+        waitForElementUntilClickable(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH));
+        clickToElement(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH));
         staticWait(1);
         return this;
     }
 
-
-    @Step("Click to all navigation buttons by type '{0}'")
-    public TopProductsPageObject clickToAllNavigationButtonsByType(NavigationButtonType type) {
-        int numberOfButtons = getTopProducts().size() / 5 - 1;
-
-        for(int i = 0; i < numberOfButtons; i++) {
-            if(type == NavigationButtonType.FORWARD_ARROW) {
-                clickNavigationButton(By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH));
-            }
-            else {
-                clickNavigationButton(By.xpath(TopProductsPageUI.TOP_PRODUCT_BACK_ARROWS_XPATH));
-            }
-        }
-
-        if(type == NavigationButtonType.FORWARD_ARROW) {
-            waitForElementUntilInvisible(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH));
-        }
-        else {
-            waitForElementUntilInvisible(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_BACK_ARROWS_XPATH));
-        }
-
+    @Step("Show previous Top Products")
+    public TopProductsPageObject showPreviousTopProducts() {
+        waitForElementUntilClickable(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_BACK_ARROWS_XPATH));
+        clickToElement(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_BACK_ARROWS_XPATH));
+        staticWait(1);
         return this;
+    }
+
+    @Step("Show all Top Products by '{0}'")
+    public TopProductsPageObject showAllTopProductsFromSide(NavigationButtonType type) {
+        if (type == NavigationButtonType.FORWARD_ARROW) {
+            while (getElement(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH)).isDisplayed()) {
+                showNextTopProducts();
+            }
+        } else if (type == NavigationButtonType.BACK_ARROW) {
+            while (getElement(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_BACK_ARROWS_XPATH)).isDisplayed()) {
+                showPreviousTopProducts();
+            }
+        }
+        return this;
+    }
+
+    @Step("Validate Show Next Top Products button disappearing")
+    public boolean isShowNextTopProductsButtonDisappeared() {
+        return isElementDisplayed(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_FORWARD_ARROWS_XPATH));
+    }
+
+    @Step("Validate Show Previous Top Products button disappearing")
+    public boolean isShowPreviousTopProductsButtonDisappeared() {
+        return isElementDisplayed(driver, By.xpath(TopProductsPageUI.TOP_PRODUCT_BACK_ARROWS_XPATH));
     }
 }

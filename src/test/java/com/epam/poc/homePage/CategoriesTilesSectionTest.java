@@ -8,6 +8,8 @@ import com.epam.poc.utilities.listeners.TestListener;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Flaky;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -36,6 +38,8 @@ public class CategoriesTilesSectionTest extends BaseTest {
     @Test
     @Description("Test description: Verify random category in Home Page")
     @Story("Categories tiles section")
+    @Issue("266")
+    @Flaky
     @Parameters({"pageUrl"})
     public void verifyRandomCategoryHomePage() {
         //Click shopee icon to back to homepage
